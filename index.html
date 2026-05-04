@@ -1135,6 +1135,46 @@
       display: block;
     }
 
+    /* ===== LANGUAGE TOGGLE ===== */
+    .nav-lang-btn {
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 4px 14px;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--duration-fast) ease;
+      font-family: 'Noto Naskh Arabic', var(--font-body);
+    }
+    .nav-lang-btn:hover {
+      background: var(--color-text);
+      color: var(--color-surface);
+      border-color: var(--color-text);
+    }
+
+    /* ===== RTL SUPPORT ===== */
+    body.rtl {
+      direction: rtl;
+      text-align: right;
+    }
+    body.rtl .nav-links { flex-direction: row-reverse; }
+    body.rtl .hero-social { flex-direction: row-reverse; }
+    body.rtl .hero-badge { left: clamp(1.5rem, 4vw, 3rem); right: auto; }
+    body.rtl .hero-content { text-align: right; }
+    body.rtl .hero-stat { right: auto; left: clamp(1.5rem, 4vw, 3rem); text-align: right; }
+    body.rtl .hero-subtitle { direction: ltr; }
+    body.rtl .hero-title { font-family: 'Noto Naskh Arabic', var(--font-display); line-height: 1.15; }
+    body.rtl .cell-pill { left: auto; right: 12px; }
+    body.rtl .show-row { flex-direction: row-reverse; }
+    body.rtl .xfeed-header { flex-direction: row-reverse; }
+    body.rtl .ed-block { direction: rtl; }
+    body.rtl .ed-block.flip { direction: rtl; }
+    body.rtl .ed-ar { direction: ltr; text-align: left; }
+    body.rtl .footer-inner { direction: rtl; }
+    body.rtl .nav-lang-btn { font-family: var(--font-body); }
+
     /* ===== RESPONSIVE ===== */
     /* Tablet: 2-col organic
        [--- Noor Riyadh wide ---]
@@ -1238,10 +1278,11 @@
       <img src="assets/images/logo.png" alt="Super Figure" class="nav-logo-img">
     </a>
     <ul class="nav-links">
-      <li><a href="#editorial">Work</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="#feed">Feed</a></li>
-      <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+      <li><a href="#editorial" data-i18n="nav.work">Work</a></li>
+      <li><a href="about.html" data-i18n="nav.about">About</a></li>
+      <li><a href="#feed" data-i18n="nav.feed">Feed</a></li>
+      <li><a href="#contact" class="nav-cta" data-i18n="nav.talk">Let's Talk</a></li>
+      <li><button class="nav-lang-btn" data-lang-toggle onclick="SF_I18N.toggle()">عربي</button></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -1250,10 +1291,11 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#editorial">Work</a>
-  <a href="about.html">About</a>
-  <a href="#feed">Feed</a>
-  <a href="#contact">Contact</a>
+  <a href="#editorial" data-i18n="nav.work">Work</a>
+  <a href="about.html" data-i18n="nav.about">About</a>
+  <a href="#feed" data-i18n="nav.feed">Feed</a>
+  <a href="#contact" data-i18n="nav.contact">Contact</a>
+  <button class="nav-lang-btn" data-lang-toggle onclick="SF_I18N.toggle()">عربي</button>
 </div>
 
 <main id="main">
@@ -1280,10 +1322,10 @@
 
     <!-- Bottom-left text content -->
     <div class="hero-content">
-      <span class="hero-eyebrow">Super Figure</span>
-      <h1 class="hero-title">Call <span class="accent">for</span><br>Innovator</h1>
-      <p class="hero-subtitle" lang="ar">نداء للمبتكرين</p>
-      <p class="hero-desc">We amplify the stories that shape the Gulf's future — tech founders, racing teams, artists, and brands building what's next.</p>
+      <span class="hero-eyebrow" data-i18n="hero.eyebrow">Voice of Vision</span>
+      <h1 class="hero-title" data-i18n-html="hero.title">Call <span class="accent">for</span><br>Innovator</h1>
+      <p class="hero-subtitle" lang="ar" data-i18n="hero.subtitle">نداء للمبتكرين</p>
+      <p class="hero-desc" data-i18n="hero.desc">We amplify the stories that shape the Gulf's future — tech founders, racing teams, artists, and brands building what's next.</p>
       <div class="hero-cta-row">
         <a href="mailto:jacques.mak@manhattanxholding.com" class="btn-share">
           Share your Story
@@ -1312,15 +1354,15 @@
         <span class="pill pill--gold"><span class="dot"></span>Gulf</span>
         <span class="pill"><span class="dot"></span>Tech</span>
       </div>
-      <span class="bento-label">Voice of Vision</span>
-      <div class="bento-title">Episode 01</div>
-      <p class="bento-sub">Weekly conversations with founders, racers, and investors — filmed in real places. A studio. A restaurant. On the road.</p>
+      <span class="bento-label" data-i18n="bento.glass.label">Voice of Vision</span>
+      <div class="bento-title" data-i18n="bento.glass.title">Episode 01</div>
+      <p class="bento-sub" data-i18n="bento.glass.sub">Weekly conversations with founders, racers, and investors — filmed in real places. A studio. A restaurant. On the road.</p>
       <div style="margin-top:auto; padding-top:1.5rem;">
         <div class="circle-cta-wrap">
           <a href="#editorial" class="circle-cta" aria-label="Explore work">
             <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
           </a>
-          <span class="circle-cta-label">Explore</span>
+          <span class="circle-cta-label" data-i18n="bento.glass.cta">Explore</span>
         </div>
       </div>
     </div>
@@ -1328,40 +1370,40 @@
     <!-- Cell 2: Image — Noor Riyadh -->
     <div class="bento-cell bc-2 reveal reveal-delay-1">
       <img src="assets/images/editorial-portrait.png" alt="Noor Riyadh light art festival" loading="lazy">
-      <span class="cell-pill">Light Art : Noor Riyadh '26</span>
+      <span class="cell-pill" data-i18n="bento.pill.noor">Light Art : Noor Riyadh '26</span>
     </div>
 
     <!-- Cell 3: Dark promo card -->
     <div class="bento-cell bento-cell--promo bc-3 reveal reveal-delay-2">
-      <span class="promo-label">Coming Soon</span>
-      <div class="promo-title">The Creator Incubator</div>
-      <p class="promo-sub">Apply to join the first cohort of Gulf-based storytellers.</p>
+      <span class="promo-label" data-i18n="bento.promo.label">Coming Soon</span>
+      <div class="promo-title" data-i18n="bento.promo.title">The Creator Incubator</div>
+      <p class="promo-sub" data-i18n="bento.promo.sub">Apply to join the first cohort of Gulf-based storytellers.</p>
     </div>
 
     <!-- Cell 4: Image — F1 Saudi GP -->
     <div class="bento-cell bc-4 reveal reveal-delay-3">
       <img src="assets/images/f1-classic.png" alt="Jeddah Corniche Circuit F1" loading="lazy">
-      <span class="cell-pill">Motorsport : Jeddah Corniche Circuit</span>
+      <span class="cell-pill" data-i18n="bento.pill.f1">Motorsport : Jeddah Corniche Circuit</span>
     </div>
 
     <!-- Cell 5: Stat ring -->
     <div class="bento-cell bento-cell--stat bc-5 reveal reveal-delay-4">
       <div class="stat-ring">
-        <span class="number">7</span>
+        <span class="number" data-i18n="bento.stat.number">7</span>
       </div>
-      <span class="stat-ring-label">Countries<br>covered</span>
+      <span class="stat-ring-label" data-i18n-html="bento.stat.label">Countries<br>covered</span>
     </div>
 
     <!-- Cell 6: Image — LEAP tech -->
     <div class="bento-cell bc-6 reveal reveal-delay-1">
       <img src="assets/images/gradient-orb.png" alt="LEAP 2026 tech summit" loading="lazy">
-      <span class="cell-pill">AI & Tech : LEAP 2026</span>
+      <span class="cell-pill" data-i18n="bento.pill.leap">AI & Tech : LEAP 2026</span>
     </div>
 
     <!-- Cell 7: Wide image — Diriyah Biennale -->
     <div class="bento-cell bento-cell--wide bc-7 reveal reveal-delay-2">
       <img src="assets/images/kaleidoscope-art.png" alt="Diriyah Biennale contemporary art" loading="lazy">
-      <span class="cell-pill">Art Club : Diriyah Biennale</span>
+      <span class="cell-pill" data-i18n="bento.pill.diriyah">Art Club : Diriyah Biennale</span>
     </div>
 
     <!-- Cell 8: Shows (Podcast + Live) -->
@@ -1372,7 +1414,7 @@
           <span class="show-dot"></span>
         </div>
         <div class="show-info">
-          <h3 class="show-name">Offgrid <span class="show-type">(Podcast)</span></h3>
+          <h3 class="show-name"><span data-i18n="shows.offgrid">Offgrid</span> <span class="show-type" data-i18n="shows.offgrid.type">(Podcast)</span></h3>
         </div>
         <a href="#" class="show-arrow" aria-label="Listen to Offgrid">
           <svg viewBox="0 0 24 24" width="16" height="16"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -1384,7 +1426,7 @@
           <span class="show-dot"></span>
         </div>
         <div class="show-info">
-          <h3 class="show-name">The Majlis <span class="show-type">(Live Show)</span></h3>
+          <h3 class="show-name"><span data-i18n="shows.majlis">The Majlis</span> <span class="show-type" data-i18n="shows.majlis.type">(Live Show)</span></h3>
         </div>
         <a href="#" class="show-arrow" aria-label="Watch The Majlis">
           <svg viewBox="0 0 24 24" width="16" height="16"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -1399,10 +1441,10 @@
     <div class="xfeed-inner">
       <div class="xfeed-header reveal">
         <div>
-          <span class="ed-label" style="margin-bottom:0.75rem;">Live</span>
-          <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); font-weight:300; color:var(--color-text);">What we're saying.</h2>
+          <span class="ed-label" style="margin-bottom:0.75rem;" data-i18n="feed.label">Live</span>
+          <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); font-weight:300; color:var(--color-text);" data-i18n="feed.title">What we're saying.</h2>
         </div>
-        <a href="https://x.com" target="_blank" rel="noopener" class="btn btn-outline" style="border-radius:var(--radius-pill); padding:10px 24px;">Follow @SuperFigure</a>
+        <a href="https://x.com" target="_blank" rel="noopener" class="btn btn-outline" style="border-radius:var(--radius-pill); padding:10px 24px;" data-i18n="feed.follow">Follow @SuperFigure</a>
       </div>
       <div class="xfeed-scroll">
         <div class="xfeed-card">
@@ -1410,7 +1452,7 @@
             <span class="xfeed-handle">@SuperFigure</span>
             <span class="xfeed-time">2h</span>
           </div>
-          <p class="xfeed-text">Just wrapped filming Episode 01 of Voice of Vision. Three cameras. One table. A founder who built a $2B company from a dorm room. Dropping next week.</p>
+          <p class="xfeed-text" data-i18n="feed.tweet1">Just wrapped filming Episode 01 of Voice of Vision. Three cameras. One table. A founder who built a $2B company from a dorm room. Dropping next week.</p>
           <div class="xfeed-img"><img src="assets/images/podcast-studio.jpg" alt="Voice of Vision podcast studio" loading="lazy"></div>
         </div>
         <div class="xfeed-card">
@@ -1418,7 +1460,7 @@
             <span class="xfeed-handle">@SuperFigure</span>
             <span class="xfeed-time">8h</span>
           </div>
-          <p class="xfeed-text">On the ground at LEAP 2026 in Riyadh. 172,000 attendees. We're here to cover what happens after the keynotes end.</p>
+          <p class="xfeed-text" data-i18n="feed.tweet2">On the ground at LEAP 2026 in Riyadh. 172,000 attendees. We're here to cover what happens after the keynotes end.</p>
           <div class="xfeed-img"><img src="assets/images/tech-summit.jpg" alt="LEAP 2026 tech summit" loading="lazy"></div>
         </div>
         <div class="xfeed-card">
@@ -1426,7 +1468,7 @@
             <span class="xfeed-handle">@SuperFigure</span>
             <span class="xfeed-time">1d</span>
           </div>
-          <p class="xfeed-text">Maffi Racing just signed their 21st driver. We've been documenting the journey since driver number 3. The long-form piece drops this Thursday.</p>
+          <p class="xfeed-text" data-i18n="feed.tweet3">Maffi Racing just signed their 21st driver. We've been documenting the journey since driver number 3. The long-form piece drops this Thursday.</p>
           <div class="xfeed-img"><img src="assets/images/racing-car.jpg" alt="Racing car" loading="lazy"></div>
         </div>
         <div class="xfeed-card">
@@ -1434,14 +1476,14 @@
             <span class="xfeed-handle">@SuperFigure</span>
             <span class="xfeed-time">2d</span>
           </div>
-          <p class="xfeed-text">New essay on the platform: "Why the Gulf's esports scene will outpace Europe by 2028." Written by a creator in our incubator program. Read it free.</p>
+          <p class="xfeed-text" data-i18n="feed.tweet4">New essay on the platform: "Why the Gulf's esports scene will outpace Europe by 2028." Written by a creator in our incubator program. Read it free.</p>
         </div>
         <div class="xfeed-card">
           <div class="xfeed-meta">
             <span class="xfeed-handle">@SuperFigure</span>
             <span class="xfeed-time">3d</span>
           </div>
-          <p class="xfeed-text">Min-Liang Tan told us something off-camera that changed how we think about AI and creativity. More in Voice of Vision Ep. 02.</p>
+          <p class="xfeed-text" data-i18n="feed.tweet5">Min-Liang Tan told us something off-camera that changed how we think about AI and creativity. More in Voice of Vision Ep. 02.</p>
           <div class="xfeed-img"><img src="assets/images/ai-abstract.jpg" alt="Abstract AI art" loading="lazy"></div>
         </div>
       </div>
@@ -1495,19 +1537,19 @@
           <img src="assets/images/filmmaker.jpg" alt="Content creation" loading="lazy">
         </div>
         <div class="ed-text reveal-right">
-          <span class="ed-label">The Platform</span>
-          <h2 class="ed-title">Write it. Film it.<br>Host it. Own it.</h2>
-          <p class="ed-body">A UGC platform where creators publish long-form essays, cinematic documentaries, and podcast series. Think editorial depth meets social reach — focused on Gulf tech, racing, travel, and the people behind it all.</p>
-          <p class="ed-ar" lang="ar">منصّة UGC للمبدعين: مقالات معمّقة، أفلام وثائقية، وبودكاست — تجمع العمق التحريري مع الوصول الاجتماعي.</p>
+          <span class="ed-label" data-i18n="ed1.label">The Platform</span>
+          <h2 class="ed-title" data-i18n-html="ed1.title">Write it. Film it.<br>Host it. Own it.</h2>
+          <p class="ed-body" data-i18n="ed1.body">A UGC platform where creators publish long-form essays, cinematic documentaries, and podcast series. Think editorial depth meets social reach — focused on Gulf tech, racing, travel, and the people behind it all.</p>
+          <p class="ed-ar" lang="ar" data-i18n="ed1.ar">منصّة UGC للمبدعين: مقالات معمّقة، أفلام وثائقية، وبودكاست — تجمع العمق التحريري مع الوصول الاجتماعي.</p>
         </div>
       </div>
 
       <div class="ed-block flip">
         <div class="ed-text reveal-left">
-          <span class="ed-label">Voice of Vision</span>
-          <h2 class="ed-title">The interview<br>that goes<br>somewhere.</h2>
-          <p class="ed-body">Weekly conversations with tech founders, racing drivers, and investors — filmed in real places. A studio. A restaurant. On the road. Entertainment meets substance.</p>
-          <p class="ed-ar" lang="ar">حوارات أسبوعية مع مؤسسي التقنية وسائقي السباقات والمستثمرين — تُصوَّر في أماكن حقيقية. ترفيه يلتقي بالجوهر.</p>
+          <span class="ed-label" data-i18n="ed2.label">Voice of Vision</span>
+          <h2 class="ed-title" data-i18n-html="ed2.title">The interview<br>that goes<br>somewhere.</h2>
+          <p class="ed-body" data-i18n="ed2.body">Weekly conversations with tech founders, racing drivers, and investors — filmed in real places. A studio. A restaurant. On the road. Entertainment meets substance.</p>
+          <p class="ed-ar" lang="ar" data-i18n="ed2.ar">حوارات أسبوعية مع مؤسسي التقنية وسائقي السباقات والمستثمرين — تُصوَّر في أماكن حقيقية. ترفيه يلتقي بالجوهر.</p>
         </div>
         <div class="ed-img reveal-right">
           <img src="assets/images/interview-mics.jpg" alt="Voice of Vision podcast" loading="lazy">
@@ -1519,10 +1561,10 @@
           <img src="assets/images/event-lights.jpg" alt="Brand events and summits" loading="lazy">
         </div>
         <div class="ed-text reveal-right">
-          <span class="ed-label">Amplification</span>
-          <h2 class="ed-title">Summits. Events.<br>Brand collabs.</h2>
-          <p class="ed-body">We partner with tech companies, sporting events, and cultural brands to co-create media that extends their reach. From Saudi tech summits to international racing circuits.</p>
-          <p class="ed-ar" lang="ar">نشارك شركات التقنية والفعاليات الرياضية والعلامات الثقافية لإنتاج محتوى يوسّع تأثيرها — من قمم التقنية السعودية إلى حلبات السباق الدولية.</p>
+          <span class="ed-label" data-i18n="ed3.label">Amplification</span>
+          <h2 class="ed-title" data-i18n-html="ed3.title">Summits. Events.<br>Brand collabs.</h2>
+          <p class="ed-body" data-i18n="ed3.body">We partner with tech companies, sporting events, and cultural brands to co-create media that extends their reach. From Saudi tech summits to international racing circuits.</p>
+          <p class="ed-ar" lang="ar" data-i18n="ed3.ar">نشارك شركات التقنية والفعاليات الرياضية والعلامات الثقافية لإنتاج محتوى يوسّع تأثيرها — من قمم التقنية السعودية إلى حلبات السباق الدولية.</p>
         </div>
       </div>
 
@@ -1533,25 +1575,25 @@
   <section class="people-section" id="people">
     <div class="people-inner">
       <div class="people-header reveal">
-        <h2>Conversations<br>we're starting.</h2>
-        <p>Founders, racers, and chroniclers whose stories we want to tell.</p>
+        <h2 data-i18n-html="people.title">Conversations<br>we're starting.</h2>
+        <p data-i18n="people.sub">Founders, racers, and chroniclers whose stories we want to tell.</p>
       </div>
 
       <div class="people-grid">
         <div class="person-card reveal reveal-delay-1">
           <div class="person-name">Min-Liang Tan</div>
           <div class="person-role">CEO & Creative Director, Razer</div>
-          <p class="person-bio">Built Razer from a single gaming mouse into a global technology company across 150+ countries. Believes AI should empower, not replace, human creativity.</p>
+          <p class="person-bio" data-i18n="people.bio1">Built Razer from a single gaming mouse into a global technology company across 150+ countries. Believes AI should empower, not replace, human creativity.</p>
         </div>
         <div class="person-card reveal reveal-delay-2">
           <div class="person-name">Alex Thouvenin</div>
           <div class="person-role">Co-founder, Maffi Racing</div>
-          <p class="person-bio">Motorsport operator at the intersection of sport, technology and investment. 10+ race victories, two runner-up titles, drivers from four continents.</p>
+          <p class="person-bio" data-i18n="people.bio2">Motorsport operator at the intersection of sport, technology and investment. 10+ race victories, two runner-up titles, drivers from four continents.</p>
         </div>
         <div class="person-card reveal reveal-delay-3">
           <div class="person-name">Andrew Frankel</div>
           <div class="person-role">Co-founder, The Intercooler</div>
-          <p class="person-bio">30 years in automotive journalism. Co-founded the world's only ad-free online automotive magazine. Juror of the European Car of the Year.</p>
+          <p class="person-bio" data-i18n="people.bio3">30 years in automotive journalism. Co-founded the world's only ad-free online automotive magazine. Juror of the European Car of the Year.</p>
         </div>
       </div>
     </div>
@@ -1562,8 +1604,8 @@
     <img src="assets/images/hala-alghanim-f5ZB0LHwi0s-unsplash.jpg" alt="Saudi Arabia" loading="lazy" id="parallaxImg">
     <div class="fullbleed-overlay">
       <div>
-        <h2>Based in Saudi Arabia.</h2>
-        <p class="ar-place" lang="ar">المملكة العربية السعودية</p>
+        <h2 data-i18n="fullbleed.title">Based in Saudi Arabia.</h2>
+        <p class="ar-place" lang="ar" data-i18n="fullbleed.ar">المملكة العربية السعودية</p>
       </div>
     </div>
   </section>
@@ -1572,34 +1614,34 @@
   <section class="revenue-section">
     <div class="revenue-inner">
       <div class="rev-header reveal">
-        <span class="label">How it works</span>
-        <h2>Six ways we sustain the work.</h2>
+        <span class="label" data-i18n="rev.label">How it works</span>
+        <h2 data-i18n="rev.title">Six ways we sustain the work.</h2>
       </div>
       <div class="rev-grid">
         <div class="rev-cell reveal reveal-delay-1">
-          <h3>Subscriptions</h3>
-          <p>A paid community. Content co-creation. Private events.</p>
+          <h3 data-i18n="rev.h1">Subscriptions</h3>
+          <p data-i18n="rev.p1">A paid community. Content co-creation. Private events.</p>
         </div>
         <div class="rev-cell reveal reveal-delay-2">
-          <h3>Research</h3>
-          <p>Commissioned analysis for tech companies and event organizers.</p>
+          <h3 data-i18n="rev.h2">Research</h3>
+          <p data-i18n="rev.p2">Commissioned analysis for tech companies and event organizers.</p>
         </div>
         <div class="rev-cell reveal reveal-delay-3">
-          <h3>Equity</h3>
-          <p>When our coverage builds a company, we participate.</p>
+          <h3 data-i18n="rev.h3">Equity</h3>
+          <p data-i18n="rev.p3">When our coverage builds a company, we participate.</p>
         </div>
         <div class="rev-cell reveal reveal-delay-1">
-          <h3>Partnerships</h3>
-          <p>Co-branded media at Gulf sporting events and tech summits.</p>
+          <h3 data-i18n="rev.h4">Partnerships</h3>
+          <p data-i18n="rev.p4">Co-branded media at Gulf sporting events and tech summits.</p>
         </div>
         <div class="rev-cell reveal reveal-delay-2">
-          <h3>Referrals</h3>
-          <p>Connecting founders to institutional investors.</p>
+          <h3 data-i18n="rev.h5">Referrals</h3>
+          <p data-i18n="rev.p5">Connecting founders to institutional investors.</p>
         </div>
         <div class="rev-cell reveal reveal-delay-3">
-          <h3>Data</h3>
-          <p>Verified fact infrastructure for media and research.</p>
-          <span class="planned">Planned</span>
+          <h3 data-i18n="rev.h6">Data</h3>
+          <p data-i18n="rev.p6">Verified fact infrastructure for media and research.</p>
+          <span class="planned" data-i18n="rev.planned">Planned</span>
         </div>
       </div>
     </div>
@@ -1608,9 +1650,9 @@
   <!-- ===== CTA ===== -->
   <section class="cta-section" id="contact">
     <div class="reveal">
-      <h2>Interested?</h2>
+      <h2 data-i18n="cta.title">Interested?</h2>
       <span class="cta-email">jacques.mak@manhattanxholding.com</span>
-      <a href="mailto:jacques.mak@manhattanxholding.com" class="btn btn-primary" style="border-radius:var(--radius-pill); padding: 16px 48px;">Get in touch</a>
+      <a href="mailto:jacques.mak@manhattanxholding.com" class="btn btn-primary" style="border-radius:var(--radius-pill); padding: 16px 48px;" data-i18n="cta.btn">Get in touch</a>
     </div>
   </section>
 
@@ -1624,14 +1666,14 @@
     </div>
     <div style="text-align:right;">
       <ul class="footer-links" style="align-items:flex-end;">
-        <li><a href="#editorial">Work</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="mailto:jacques.mak@manhattanxholding.com">Contact</a></li>
+        <li><a href="#editorial" data-i18n="nav.work">Work</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li><a href="mailto:jacques.mak@manhattanxholding.com" data-i18n="nav.contact">Contact</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">&copy; 2026 Super Figure</span>
+    <span class="footer-copy" data-i18n-html="footer.copy">&copy; 2026 Super Figure</span>
   </div>
 </footer>
 
@@ -1725,6 +1767,8 @@
   }, { passive: true });
 })();
 </script>
+
+<script src="assets/js/i18n.js"></script>
 
 </body>
 </html>

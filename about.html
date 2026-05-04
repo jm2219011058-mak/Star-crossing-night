@@ -578,6 +578,40 @@
       display: block;
     }
 
+    /* ===== LANG TOGGLE ===== */
+    .nav-lang-btn {
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 4px 14px;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--duration-fast) ease;
+      font-family: 'Noto Naskh Arabic', var(--font-body);
+    }
+    .nav-lang-btn:hover {
+      background: var(--color-text);
+      color: var(--color-surface);
+      border-color: var(--color-text);
+    }
+
+    /* ===== RTL SUPPORT ===== */
+    body.rtl {
+      direction: rtl;
+      text-align: right;
+    }
+    body.rtl .nav-links { flex-direction: row-reverse; }
+    body.rtl .cell-pill { left: auto; right: 12px; }
+    body.rtl .team-card { text-align: right; }
+    body.rtl .team-card-social { justify-content: flex-start; }
+    body.rtl .modal-header { flex-direction: row-reverse; }
+    body.rtl .modal-close { margin-left: 0; margin-right: auto; }
+    body.rtl .footer-inner { direction: rtl; }
+    body.rtl .vision-inner { direction: rtl; }
+    body.rtl .nav-lang-btn { font-family: var(--font-body); }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .vision-inner {
@@ -648,10 +682,11 @@
       <img src="assets/images/logo.png" alt="Super Figure" class="nav-logo-img">
     </a>
     <ul class="nav-links">
-      <li><a href="index.html#editorial">Work</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="index.html#feed">Feed</a></li>
-      <li><a href="mailto:jacques.mak@manhattanxholding.com" class="nav-cta">Let's Talk</a></li>
+      <li><a href="index.html#editorial" data-i18n="nav.work">Work</a></li>
+      <li><a href="about.html" class="active" data-i18n="nav.about">About</a></li>
+      <li><a href="index.html#feed" data-i18n="nav.feed">Feed</a></li>
+      <li><a href="mailto:jacques.mak@manhattanxholding.com" class="nav-cta" data-i18n="nav.talk">Let's Talk</a></li>
+      <li><button class="nav-lang-btn" data-lang-toggle onclick="SF_I18N.toggle()">عربي</button></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -660,10 +695,11 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#editorial">Work</a>
-  <a href="about.html">About</a>
-  <a href="index.html#feed">Feed</a>
-  <a href="mailto:jacques.mak@manhattanxholding.com">Contact</a>
+  <a href="index.html#editorial" data-i18n="nav.work">Work</a>
+  <a href="about.html" data-i18n="nav.about">About</a>
+  <a href="index.html#feed" data-i18n="nav.feed">Feed</a>
+  <a href="mailto:jacques.mak@manhattanxholding.com" data-i18n="nav.contact">Contact</a>
+  <button class="nav-lang-btn" data-lang-toggle onclick="SF_I18N.toggle()">عربي</button>
 </div>
 
 <main id="main">
@@ -671,8 +707,8 @@
   <!-- ===== ABOUT HERO ===== -->
   <section class="about-hero">
     <div class="about-hero-inner reveal">
-      <span class="about-eyebrow">About Us</span>
-      <h1 class="about-hero-title">The people behind<br><img src="assets/images/logo nobg.png" alt="Super Figure" class="about-hero-logo"></h1>
+      <span class="about-eyebrow" data-i18n="about.eyebrow">About Us</span>
+      <h1 class="about-hero-title"><span data-i18n="about.title">The people behind</span><br><img src="assets/images/logo nobg.png" alt="Super Figure" class="about-hero-logo"></h1>
     </div>
   </section>
 
@@ -680,9 +716,9 @@
   <section class="vision-section">
     <div class="vision-inner">
       <div class="vision-card reveal">
-        <span class="vision-label">Our Vision</span>
-        <h2 class="vision-title">Building the media house<br>the Gulf <span class="v-accent">deserves</span></h2>
-        <p class="vision-body">Super Figure exists at the intersection of culture, commerce, and creativity. We craft stories that move markets, shape narratives, and amplify the voices defining tomorrow's Gulf.</p>
+        <span class="vision-label" data-i18n="about.vision.label">Our Vision</span>
+        <h2 class="vision-title" data-i18n-html="about.vision.title">Building the media house<br>the Gulf <span class="v-accent">deserves</span></h2>
+        <p class="vision-body" data-i18n="about.vision.body">Super Figure exists at the intersection of culture, commerce, and creativity. We craft stories that move markets, shape narratives, and amplify the voices defining tomorrow's Gulf.</p>
       </div>
       <div class="vision-video reveal reveal-delay-1">
         <video autoplay muted loop playsinline>
@@ -698,8 +734,8 @@
   <section class="team-section">
     <div class="team-inner">
       <div class="team-header reveal">
-        <span class="team-label">Leadership</span>
-        <h2 class="team-title">Meet the co-founders</h2>
+        <span class="team-label" data-i18n="about.team.label">Leadership</span>
+        <h2 class="team-title" data-i18n="about.team.title">Meet the co-founders</h2>
       </div>
 
       <div class="team-grid">
@@ -710,10 +746,10 @@
             <img src="assets/images/team/Abdulaziz Al-Qahtani.jpeg" alt="Abdulaziz Al-Qahtani">
           </div>
           <div class="team-card-info">
-            <h3 class="team-card-name">Abdulaziz Al-Qahtani</h3>
-            <span class="team-card-role">Co-Founder & CFO</span>
-            <p class="team-card-bio">Law background with deep expertise in Saudi regulatory frameworks. Established entrepreneur in the Saudi business sector, specializing in operations management and strategic capital allocation.</p>
-            <button class="team-learn-more" onclick="openModal('modal-abdulaziz')">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <h3 class="team-card-name" data-i18n="about.card1.name">Abdulaziz Al-Qahtani</h3>
+            <span class="team-card-role" data-i18n="about.card1.role">Co-Founder & CFO</span>
+            <p class="team-card-bio" data-i18n="about.card1.bio">Law background with deep expertise in Saudi regulatory frameworks. Established entrepreneur in the Saudi business sector, specializing in operations management and strategic capital allocation.</p>
+            <button class="team-learn-more" onclick="openModal('modal-abdulaziz')"><span data-i18n="about.card1.more">Learn more</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             <div class="team-card-social">
               <a href="#" class="team-social-btn" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -731,10 +767,10 @@
             <img src="assets/images/team/Jacques Mak.png" alt="Jacques Mak">
           </div>
           <div class="team-card-info">
-            <h3 class="team-card-name">Jacques Mak</h3>
-            <span class="team-card-role">Co-Founder & Creative Director</span>
-            <p class="team-card-bio">Co-Founder of Unimine Tech (UE5 UGC platform). Dual degree in Synthetic Biology and Engineering Design from UC Davis. Builds global-scale architectures with long-horizon capital partners.</p>
-            <button class="team-learn-more" onclick="openModal('modal-jacques')">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <h3 class="team-card-name" data-i18n="about.card2.name">Jacques Mak</h3>
+            <span class="team-card-role" data-i18n="about.card2.role">Co-Founder & Creative Director</span>
+            <p class="team-card-bio" data-i18n="about.card2.bio">Co-Founder of Unimine Tech (UE5 UGC platform). Dual degree in Synthetic Biology and Engineering Design from UC Davis. Builds global-scale architectures with long-horizon capital partners.</p>
+            <button class="team-learn-more" onclick="openModal('modal-jacques')"><span data-i18n="about.card2.more">Learn more</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             <div class="team-card-social">
               <a href="#" class="team-social-btn" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -752,10 +788,10 @@
             <img src="assets/images/team/Jamie Zhang.jpeg" alt="Jamie Zhang">
           </div>
           <div class="team-card-info">
-            <h3 class="team-card-name">Jamie Zhang</h3>
-            <span class="team-card-role">Co-Founder & CEO</span>
-            <p class="team-card-bio">MIT graduate, former McKinsey Senior Engagement Manager. Co-founded Masdar Investment LLC with Oman Royal Families. Founded IRX Fin (RMB 10B angel funding).</p>
-            <button class="team-learn-more" onclick="openModal('modal-jamie')">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <h3 class="team-card-name" data-i18n="about.card3.name">Jamie Zhang</h3>
+            <span class="team-card-role" data-i18n="about.card3.role">Co-Founder & CEO</span>
+            <p class="team-card-bio" data-i18n="about.card3.bio">MIT graduate, former McKinsey Senior Engagement Manager. Co-founded Masdar Investment LLC with Oman Royal Families. Founded IRX Fin (RMB 10B angel funding).</p>
+            <button class="team-learn-more" onclick="openModal('modal-jamie')"><span data-i18n="about.card3.more">Learn more</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             <div class="team-card-social">
               <a href="#" class="team-social-btn" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -774,9 +810,9 @@
   <!-- ===== CTA ===== -->
   <section class="cta-section" id="contact">
     <div class="reveal">
-      <h2>Work with us</h2>
+      <h2 data-i18n="about.cta.title">Work with us</h2>
       <span class="cta-email">jacques.mak@manhattanxholding.com</span>
-      <a href="mailto:jacques.mak@manhattanxholding.com" class="btn btn-primary" style="border-radius:var(--radius-pill); padding: 16px 48px;">Get in touch</a>
+      <a href="mailto:jacques.mak@manhattanxholding.com" class="btn btn-primary" style="border-radius:var(--radius-pill); padding: 16px 48px;" data-i18n="cta.btn">Get in touch</a>
     </div>
   </section>
 
@@ -790,14 +826,14 @@
     </div>
     <div style="text-align:right;">
       <ul class="footer-links" style="align-items:flex-end;">
-        <li><a href="index.html#editorial">Work</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="mailto:jacques.mak@manhattanxholding.com">Contact</a></li>
+        <li><a href="index.html#editorial" data-i18n="nav.work">Work</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li><a href="mailto:jacques.mak@manhattanxholding.com" data-i18n="nav.contact">Contact</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">&copy; 2026 Super Figure</span>
+    <span class="footer-copy" data-i18n-html="footer.copy">&copy; 2026 Super Figure</span>
   </div>
 </footer>
 
@@ -879,19 +915,19 @@
         <img src="assets/images/team/Abdulaziz Al-Qahtani.jpeg" alt="Abdulaziz Al-Qahtani">
       </div>
       <div class="modal-header-text">
-        <h3>Abdulaziz Al-Qahtani</h3>
-        <span>Co-Founder & CFO</span>
+        <h3 data-i18n="about.card1.name">Abdulaziz Al-Qahtani</h3>
+        <span data-i18n="about.card1.role">Co-Founder & CFO</span>
       </div>
       <button class="modal-close" onclick="closeModal('modal-abdulaziz')" aria-label="Close">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body">
-      <span class="modal-label">Background</span>
-      <p>Abdulaziz is a high-stakes strategic leader with a diverse background spanning operations management, legal frameworks, and local entrepreneurship. With an academic focus on Law, he specializes in navigating Saudi Arabia's complex regulatory landscape, ensuring institutional compliance and strategic growth.</p>
-      <p>As an established entrepreneur in the Saudi business sector, he possesses deep insights into market dynamics, capital allocation, and operational excellence. His leadership style is forged through years of demanding operational roles — a philosophy of discipline, precision, and result-oriented management.</p>
-      <span class="modal-label" style="margin-top:1rem;">Role at Super Figure</span>
-      <p>As CFO, Abdulaziz oversees the financial architecture that makes ambitious media projects viable. He ensures compliance across Saudi regulatory frameworks while structuring the capital strategy, revenue operations, and partnership agreements that underpin every Super Figure venture.</p>
+      <span class="modal-label" data-i18n="modal.bg">Background</span>
+      <p data-i18n="modal1.bg1">Abdulaziz is a high-stakes strategic leader with a diverse background spanning operations management, legal frameworks, and local entrepreneurship. With an academic focus on Law, he specializes in navigating Saudi Arabia's complex regulatory landscape, ensuring institutional compliance and strategic growth.</p>
+      <p data-i18n="modal1.bg2">As an established entrepreneur in the Saudi business sector, he possesses deep insights into market dynamics, capital allocation, and operational excellence. His leadership style is forged through years of demanding operational roles — a philosophy of discipline, precision, and result-oriented management.</p>
+      <span class="modal-label" style="margin-top:1rem;" data-i18n="modal.role">Role at Super Figure</span>
+      <p data-i18n="modal1.role1">As CFO, Abdulaziz oversees the financial architecture that makes ambitious media projects viable. He ensures compliance across Saudi regulatory frameworks while structuring the capital strategy, revenue operations, and partnership agreements that underpin every Super Figure venture.</p>
     </div>
   </div>
 </div>
@@ -904,19 +940,19 @@
         <img src="assets/images/team/Jacques Mak.png" alt="Jacques Mak">
       </div>
       <div class="modal-header-text">
-        <h3>Jacques Mak</h3>
-        <span>Co-Founder & Creative Director</span>
+        <h3 data-i18n="about.card2.name">Jacques Mak</h3>
+        <span data-i18n="about.card2.role">Co-Founder & Creative Director</span>
       </div>
       <button class="modal-close" onclick="closeModal('modal-jacques')" aria-label="Close">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body">
-      <span class="modal-label">Background</span>
-      <p>Co-Founder of Unimine Tech — a UE5-based UGC platform and zero-code world editor. Jacques builds global-scale architectures with long-horizon capital partners, operating at the intersection of creative technology and venture building.</p>
-      <p>He holds a dual degree in Synthetic Biology and Engineering Design from UC Davis, combining technical rigor with design thinking. This cross-disciplinary foundation shapes his approach to building systems — whether product platforms or media brands.</p>
-      <span class="modal-label" style="margin-top:1rem;">Role at Super Figure</span>
-      <p>As Creative Director, Jacques sets the visual language, editorial tone, and experience design across every Super Figure touchpoint. From the identity system and brand architecture to content production and digital product, he owns the end-to-end creative standard.</p>
+      <span class="modal-label" data-i18n="modal.bg">Background</span>
+      <p data-i18n="modal2.bg1">Co-Founder of Unimine Tech — a UE5-based UGC platform and zero-code world editor. Jacques builds global-scale architectures with long-horizon capital partners, operating at the intersection of creative technology and venture building.</p>
+      <p data-i18n="modal2.bg2">He holds a dual degree in Synthetic Biology and Engineering Design from UC Davis, combining technical rigor with design thinking. This cross-disciplinary foundation shapes his approach to building systems — whether product platforms or media brands.</p>
+      <span class="modal-label" style="margin-top:1rem;" data-i18n="modal.role">Role at Super Figure</span>
+      <p data-i18n="modal2.role1">As Creative Director, Jacques sets the visual language, editorial tone, and experience design across every Super Figure touchpoint. From the identity system and brand architecture to content production and digital product, he owns the end-to-end creative standard.</p>
     </div>
   </div>
 </div>
@@ -929,18 +965,19 @@
         <img src="assets/images/team/Jamie Zhang.jpeg" alt="Jamie Zhang">
       </div>
       <div class="modal-header-text">
-        <h3>Jamie Zhang</h3>
-        <span>Co-Founder & CEO</span>
+        <h3 data-i18n="about.card3.name">Jamie Zhang</h3>
+        <span data-i18n="about.card3.role">Co-Founder & CEO</span>
       </div>
       <button class="modal-close" onclick="closeModal('modal-jamie')" aria-label="Close">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body">
-      <span class="modal-label">Background</span>
-      <p>MIT graduate and former McKinsey Senior Engagement Manager, Jamie brings elite strategic consulting experience to Super Figure. Her career spans high-stakes advisory work across industries, sharpening her ability to architect scalable business models and drive organizational transformation at speed.</p>
-      <p>Jamie co-founded Masdar Investment LLC in partnership with Oman Royal Families, navigating sovereign wealth and cross-border investment at the highest levels of Gulf finance. She also founded IRX Fin, a fintech venture that secured RMB 10 billion in angel funding — a testament to her capital-raising acumen and deep network across Chinese and Middle Eastern financial ecosystems.</p>
-      <p>As CEO of Super Figure, Jamie orchestrates the company's commercial strategy, partnership architecture, and market expansion. Her rare ability to bridge East and West — connecting Chinese capital networks with Gulf market opportunity — gives Super Figure a decisive edge in building a truly global media house rooted in the region.</p>
+      <span class="modal-label" data-i18n="modal.bg">Background</span>
+      <p data-i18n="modal3.bg1">MIT graduate and former McKinsey Senior Engagement Manager, Jamie brings elite strategic consulting experience to Super Figure. Her career spans high-stakes advisory work across industries, sharpening her ability to architect scalable business models and drive organizational transformation at speed.</p>
+      <p data-i18n="modal3.bg2">Jamie co-founded Masdar Investment LLC in partnership with Oman Royal Families, navigating sovereign wealth and cross-border investment at the highest levels of Gulf finance. She also founded IRX Fin, a fintech venture that secured RMB 10 billion in angel funding — a testament to her capital-raising acumen and deep network across Chinese and Middle Eastern financial ecosystems.</p>
+      <span class="modal-label" style="margin-top:1rem;" data-i18n="modal.role">Role at Super Figure</span>
+      <p data-i18n="modal3.role1">As CEO of Super Figure, Jamie orchestrates the company's commercial strategy, partnership architecture, and market expansion. Her rare ability to bridge East and West — connecting Chinese capital networks with Gulf market opportunity — gives Super Figure a decisive edge in building a truly global media house rooted in the region.</p>
     </div>
   </div>
 </div>
@@ -978,6 +1015,8 @@ document.addEventListener('keydown', (e) => {
   }
 });
 </script>
+
+<script src="assets/js/i18n.js"></script>
 
 </body>
 </html>
