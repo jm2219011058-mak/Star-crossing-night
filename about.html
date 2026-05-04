@@ -78,7 +78,7 @@
     .about-hero {
       position: relative;
       z-index: 1;
-      padding: calc(var(--header-height) + clamp(4rem, 10vw, 8rem)) clamp(2rem, 6vw, 4rem) clamp(3rem, 6vw, 5rem);
+      padding: calc(var(--header-height) + clamp(2.5rem, 6vw, 4rem)) clamp(2rem, 6vw, 4rem) clamp(1.5rem, 3vw, 2.5rem);
     }
     .about-hero-inner {
       max-width: var(--max-width-narrow);
@@ -102,9 +102,14 @@
       letter-spacing: var(--tracking-display);
       margin-bottom: 1.5rem;
     }
-    .about-hero-title .accent {
-      color: var(--sage);
-      font-style: italic;
+    .about-hero-logo {
+      height: 1.1em;
+      width: auto;
+      vertical-align: baseline;
+      display: inline-block;
+      margin-left: 0.15em;
+      filter: brightness(0.85) sepia(0.15) hue-rotate(60deg);
+      opacity: 0.8;
     }
 
     /* ===== MP4 ACCENT COLORS ===== */
@@ -121,7 +126,7 @@
     .vision-section {
       position: relative;
       z-index: 1;
-      padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 4rem);
+      padding: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 6vw, 4rem);
     }
     .vision-inner {
       max-width: var(--max-width);
@@ -180,35 +185,6 @@
       letter-spacing: var(--tracking-body);
       margin-bottom: 1.5rem;
     }
-    .vision-tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: auto;
-    }
-    .vision-tag {
-      padding: 5px 14px;
-      border-radius: var(--radius-pill);
-      font-size: 0.68rem;
-      letter-spacing: 0.06em;
-      font-weight: 500;
-    }
-    .vision-tag--blue {
-      background: var(--mp4-blue-soft);
-      color: var(--mp4-blue);
-      border: 1px solid var(--mp4-blue-strong);
-    }
-    .vision-tag--red {
-      background: var(--mp4-red-soft);
-      color: var(--mp4-red);
-      border: 1px solid rgba(253, 68, 33, 0.15);
-    }
-    .vision-tag--sage {
-      background: var(--sage-soft);
-      color: var(--sage);
-      border: 1px solid var(--sage-strong);
-    }
-
     /* Video container */
     .vision-video {
       border-radius: var(--radius-xl);
@@ -260,7 +236,7 @@
     .team-section {
       position: relative;
       z-index: 1;
-      padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 4rem);
+      padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 4rem);
     }
     .team-inner {
       max-width: var(--max-width);
@@ -268,7 +244,7 @@
     }
     .team-header {
       text-align: center;
-      margin-bottom: clamp(3rem, 6vw, 5rem);
+      margin-bottom: clamp(2rem, 4vw, 3rem);
     }
     .team-label {
       font-size: var(--text-xs);
@@ -339,6 +315,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 20%;
       filter: saturate(0.9);
       transition: transform var(--duration-glacial) var(--ease-out-quint),
                   filter var(--duration-slow) var(--ease-out-quad);
@@ -412,10 +389,176 @@
       stroke: var(--color-text);
     }
 
+    /* ===== LEARN MORE BUTTON ===== */
+    .team-learn-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 1.25rem;
+      padding: 8px 20px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-border-strong);
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      letter-spacing: 0.06em;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--duration-fast) ease;
+    }
+    .team-learn-more:hover {
+      background: var(--color-text);
+      color: var(--color-surface);
+      border-color: var(--color-text);
+    }
+    .team-learn-more svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform var(--duration-fast) ease;
+    }
+    .team-learn-more:hover svg {
+      transform: translateX(2px);
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(26, 20, 16, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--duration-normal) var(--ease-out-quint),
+                  visibility var(--duration-normal) var(--ease-out-quint);
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(40px) saturate(1.6);
+      -webkit-backdrop-filter: blur(40px) saturate(1.6);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      max-width: 580px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      transform: translateY(20px) scale(0.97);
+      transition: transform var(--duration-normal) var(--ease-out-quint);
+    }
+    .modal-overlay.active .modal {
+      transform: translateY(0) scale(1);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2vw, 1.5rem);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .modal-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.6);
+      box-shadow: var(--shadow-sm);
+    }
+    .modal-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+    .modal-header-text h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--color-text);
+      font-weight: 400;
+      letter-spacing: var(--tracking-title);
+      line-height: 1.2;
+    }
+    .modal-header-text span {
+      font-size: var(--text-xs);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-top: 0.25rem;
+    }
+    .modal-close {
+      margin-left: auto;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--duration-micro) ease;
+      flex-shrink: 0;
+    }
+    .modal-close:hover {
+      background: var(--color-surface-muted);
+      border-color: var(--color-border-strong);
+    }
+    .modal-close svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--color-text-muted);
+      fill: none;
+      stroke-width: 2;
+    }
+    .modal-body {
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .modal-body p {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      letter-spacing: var(--tracking-body);
+      margin-bottom: 1rem;
+    }
+    .modal-body p:last-child { margin-bottom: 0; }
+    .modal-label {
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .modal {
+        max-height: 90vh;
+        border-radius: var(--radius-lg);
+      }
+      .modal-avatar {
+        width: 56px;
+        height: 56px;
+      }
+    }
+
     /* ===== CTA ===== */
     .cta-section {
       background: var(--color-bg);
-      padding: clamp(6rem, 14vw, 12rem) 2rem;
+      padding: clamp(3rem, 6vw, 5rem) 2rem;
       text-align: center;
       border-top: 1px solid var(--color-border);
       position: relative;
@@ -451,6 +594,9 @@
       }
       .about-hero-title {
         font-size: var(--text-2xl);
+      }
+      .about-hero-logo {
+        height: 0.95em;
       }
     }
 
@@ -526,7 +672,7 @@
   <section class="about-hero">
     <div class="about-hero-inner reveal">
       <span class="about-eyebrow">About Us</span>
-      <h1 class="about-hero-title">The people behind<br><span class="accent">Super Figure</span></h1>
+      <h1 class="about-hero-title">The people behind<br><img src="assets/images/logo nobg.png" alt="Super Figure" class="about-hero-logo"></h1>
     </div>
   </section>
 
@@ -537,11 +683,6 @@
         <span class="vision-label">Our Vision</span>
         <h2 class="vision-title">Building the media house<br>the Gulf <span class="v-accent">deserves</span></h2>
         <p class="vision-body">Super Figure exists at the intersection of culture, commerce, and creativity. We craft stories that move markets, shape narratives, and amplify the voices defining tomorrow's Gulf.</p>
-        <div class="vision-tag-row">
-          <span class="vision-tag vision-tag--blue">Media</span>
-          <span class="vision-tag vision-tag--red">Culture</span>
-          <span class="vision-tag vision-tag--sage">Gulf</span>
-        </div>
       </div>
       <div class="vision-video reveal reveal-delay-1">
         <video autoplay muted loop playsinline>
@@ -563,15 +704,37 @@
 
       <div class="team-grid">
 
-        <!-- Jacques Mak -->
+        <!-- Abdulaziz Al-Qahtani -->
         <div class="team-card reveal reveal-delay-1">
+          <div class="team-card-photo">
+            <img src="assets/images/team/Abdulaziz Al-Qahtani.jpeg" alt="Abdulaziz Al-Qahtani">
+          </div>
+          <div class="team-card-info">
+            <h3 class="team-card-name">Abdulaziz Al-Qahtani</h3>
+            <span class="team-card-role">Co-Founder & CFO</span>
+            <p class="team-card-bio">Law background with deep expertise in Saudi regulatory frameworks. Established entrepreneur in the Saudi business sector, specializing in operations management and strategic capital allocation.</p>
+            <button class="team-learn-more" onclick="openModal('modal-abdulaziz')">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <div class="team-card-social">
+              <a href="#" class="team-social-btn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="#" class="team-social-btn" aria-label="X / Twitter">
+                <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jacques Mak -->
+        <div class="team-card reveal reveal-delay-2">
           <div class="team-card-photo">
             <img src="assets/images/team/Jacques Mak.png" alt="Jacques Mak">
           </div>
           <div class="team-card-info">
             <h3 class="team-card-name">Jacques Mak</h3>
             <span class="team-card-role">Co-Founder & Creative Director</span>
-            <p class="team-card-bio">Drives the creative vision and brand identity of Super Figure. With a background spanning design, media strategy, and cultural production, Jacques shapes how the brand looks, feels, and resonates across every touchpoint.</p>
+            <p class="team-card-bio">Co-Founder of Unimine Tech (UE5 UGC platform). Dual degree in Synthetic Biology and Engineering Design from UC Davis. Builds global-scale architectures with long-horizon capital partners.</p>
+            <button class="team-learn-more" onclick="openModal('modal-jacques')">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             <div class="team-card-social">
               <a href="#" class="team-social-btn" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -584,34 +747,15 @@
         </div>
 
         <!-- Jamie Zhang -->
-        <div class="team-card reveal reveal-delay-2">
+        <div class="team-card reveal reveal-delay-3">
           <div class="team-card-photo">
             <img src="assets/images/team/Jamie Zhang.jpeg" alt="Jamie Zhang">
           </div>
           <div class="team-card-info">
             <h3 class="team-card-name">Jamie Zhang</h3>
-            <span class="team-card-role">Co-Founder & CMO</span>
-            <p class="team-card-bio">Leads brand growth, market positioning, and audience strategy. Jamie brings deep expertise in digital marketing and community building, translating Super Figure's vision into reach and resonance across MENA and beyond.</p>
-            <div class="team-card-social">
-              <a href="#" class="team-social-btn" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </a>
-              <a href="#" class="team-social-btn" aria-label="X / Twitter">
-                <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Abdulaziz Al-Qahtani -->
-        <div class="team-card reveal reveal-delay-3">
-          <div class="team-card-photo">
-            <img src="assets/images/team/Abdulaziz Al-Qahtani.jpeg" alt="Abdulaziz Al-Qahtani">
-          </div>
-          <div class="team-card-info">
-            <h3 class="team-card-name">Abdulaziz Al-Qahtani</h3>
-            <span class="team-card-role">Co-Founder & CFO</span>
-            <p class="team-card-bio">Oversees financial strategy, revenue operations, and sustainable growth. Abdulaziz ensures that Super Figure's creative ambitions are matched by disciplined fiscal planning and smart capital allocation across the group.</p>
+            <span class="team-card-role">Co-Founder & CEO</span>
+            <p class="team-card-bio">MIT graduate, former McKinsey Senior Engagement Manager. Co-founded Masdar Investment LLC with Oman Royal Families. Founded IRX Fin (RMB 10B angel funding).</p>
+            <button class="team-learn-more" onclick="openModal('modal-jamie')">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             <div class="team-card-social">
               <a href="#" class="team-social-btn" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -723,6 +867,116 @@
     }
   });
 })();
+</script>
+
+<!-- ===== MODALS ===== -->
+
+<!-- Abdulaziz Al-Qahtani -->
+<div class="modal-overlay" id="modal-abdulaziz">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-avatar">
+        <img src="assets/images/team/Abdulaziz Al-Qahtani.jpeg" alt="Abdulaziz Al-Qahtani">
+      </div>
+      <div class="modal-header-text">
+        <h3>Abdulaziz Al-Qahtani</h3>
+        <span>Co-Founder & CFO</span>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-abdulaziz')" aria-label="Close">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <span class="modal-label">Background</span>
+      <p>Abdulaziz is a high-stakes strategic leader with a diverse background spanning operations management, legal frameworks, and local entrepreneurship. With an academic focus on Law, he specializes in navigating Saudi Arabia's complex regulatory landscape, ensuring institutional compliance and strategic growth.</p>
+      <p>As an established entrepreneur in the Saudi business sector, he possesses deep insights into market dynamics, capital allocation, and operational excellence. His leadership style is forged through years of demanding operational roles — a philosophy of discipline, precision, and result-oriented management.</p>
+      <span class="modal-label" style="margin-top:1rem;">Role at Super Figure</span>
+      <p>As CFO, Abdulaziz oversees the financial architecture that makes ambitious media projects viable. He ensures compliance across Saudi regulatory frameworks while structuring the capital strategy, revenue operations, and partnership agreements that underpin every Super Figure venture.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Jacques Mak -->
+<div class="modal-overlay" id="modal-jacques">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-avatar">
+        <img src="assets/images/team/Jacques Mak.png" alt="Jacques Mak">
+      </div>
+      <div class="modal-header-text">
+        <h3>Jacques Mak</h3>
+        <span>Co-Founder & Creative Director</span>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-jacques')" aria-label="Close">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <span class="modal-label">Background</span>
+      <p>Co-Founder of Unimine Tech — a UE5-based UGC platform and zero-code world editor. Jacques builds global-scale architectures with long-horizon capital partners, operating at the intersection of creative technology and venture building.</p>
+      <p>He holds a dual degree in Synthetic Biology and Engineering Design from UC Davis, combining technical rigor with design thinking. This cross-disciplinary foundation shapes his approach to building systems — whether product platforms or media brands.</p>
+      <span class="modal-label" style="margin-top:1rem;">Role at Super Figure</span>
+      <p>As Creative Director, Jacques sets the visual language, editorial tone, and experience design across every Super Figure touchpoint. From the identity system and brand architecture to content production and digital product, he owns the end-to-end creative standard.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Jamie Zhang -->
+<div class="modal-overlay" id="modal-jamie">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-avatar">
+        <img src="assets/images/team/Jamie Zhang.jpeg" alt="Jamie Zhang">
+      </div>
+      <div class="modal-header-text">
+        <h3>Jamie Zhang</h3>
+        <span>Co-Founder & CEO</span>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-jamie')" aria-label="Close">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <span class="modal-label">Background</span>
+      <p>MIT graduate and former McKinsey Senior Engagement Manager, Jamie brings elite strategic consulting experience to Super Figure. Her career spans high-stakes advisory work across industries, sharpening her ability to architect scalable business models and drive organizational transformation at speed.</p>
+      <p>Jamie co-founded Masdar Investment LLC in partnership with Oman Royal Families, navigating sovereign wealth and cross-border investment at the highest levels of Gulf finance. She also founded IRX Fin, a fintech venture that secured RMB 10 billion in angel funding — a testament to her capital-raising acumen and deep network across Chinese and Middle Eastern financial ecosystems.</p>
+      <p>As CEO of Super Figure, Jamie orchestrates the company's commercial strategy, partnership architecture, and market expansion. Her rare ability to bridge East and West — connecting Chinese capital networks with Gulf market opportunity — gives Super Figure a decisive edge in building a truly global media house rooted in the region.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal JS -->
+<script>
+function openModal(id) {
+  const overlay = document.getElementById(id);
+  if (!overlay) return;
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  const overlay = document.getElementById(id);
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.active').forEach(overlay => {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+});
 </script>
 
 </body>
