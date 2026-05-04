@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUPER FIGURE</title>
+  <meta name="description" content="SUPER FIGURE — a media house for the Gulf and beyond.">
+  <meta property="og:title" content="SUPER FIGURE">
+  <meta property="og:description" content="A media house for the Gulf and beyond.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500&family=JetBrains+Mono:wght@300;400&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/animations.css">
+
+  <style>
+    .ar { font-family: var(--font-arabic); direction: rtl; }
+
+    /* ===== SAGE BANDAGE STRIPS (background layer) ===== */
+    .strips-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .strip {
+      position: absolute;
+      background: var(--sage);
+      border-radius: 6px;
+      will-change: transform;
+      transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    /* Solid fills — BOLD like boxer's wraps */
+    .strip--solid { opacity: 0.18; }
+    /* Outlined / hollow */
+    .strip--outline {
+      background: transparent;
+      border: 3.5px solid var(--sage);
+      opacity: 0.22;
+    }
+    /* Individual strip placements — exaggerated bandage wraps */
+    .strip-1  { width: 420px; height: 48px; top: 4%;   left: -5%;  transform: rotate(-14deg); }
+    .strip-2  { width: 600px; height: 38px; top: 12%;  right: -8%; transform: rotate(8deg); }
+    .strip-3  { width: 320px; height: 56px; top: 26%;  left: 5%;   transform: rotate(-32deg); }
+    .strip-4  { width: 500px; height: 32px; top: 38%;  right: 6%;  transform: rotate(18deg); }
+    .strip-5  { width: 700px; height: 44px; top: 50%;  left: -10%; transform: rotate(-6deg); }
+    .strip-6  { width: 350px; height: 60px; top: 60%;  right: -4%; transform: rotate(26deg); }
+    .strip-7  { width: 550px; height: 36px; top: 72%;  left: 10%;  transform: rotate(-22deg); }
+    .strip-8  { width: 440px; height: 42px; top: 84%;  right: 4%;  transform: rotate(12deg); }
+    .strip-9  { width: 280px; height: 68px; top: 18%;  left: 48%;  transform: rotate(-38deg); }
+    .strip-10 { width: 650px; height: 28px; top: 44%;  left: 22%;  transform: rotate(4deg); }
+    .strip-11 { width: 380px; height: 50px; top: 68%;  left: 42%;  transform: rotate(-16deg); }
+    .strip-12 { width: 480px; height: 36px; top: 90%;  left: 30%;  transform: rotate(24deg); }
+    .strip-13 { width: 520px; height: 52px; top: 6%;   left: 35%;  transform: rotate(-10deg); }
+    .strip-14 { width: 380px; height: 40px; top: 34%;  right: -6%; transform: rotate(28deg); }
+    .strip-15 { width: 460px; height: 34px; top: 56%;  left: 55%;  transform: rotate(-28deg); }
+    .strip-16 { width: 300px; height: 58px; top: 80%;  left: -3%;  transform: rotate(16deg); }
+
+    /* ===== GLASS MIXIN ===== */
+    .glass {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .glass-strong {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(32px) saturate(1.6);
+      -webkit-backdrop-filter: blur(32px) saturate(1.6);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    .glass-subtle {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(12px) saturate(1.2);
+      -webkit-backdrop-filter: blur(12px) saturate(1.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* ===== PILL TAGS ===== */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+    .pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sage);
+    }
+    .pill--gold .dot { background: var(--gold); }
+    .pill--gold { border-color: var(--gold-soft-strong); background: var(--gold-soft); color: var(--gold-dim); }
+
+    /* ===== STAT BADGE ===== */
+    .stat-badge {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-bento);
+    }
+    .stat-badge .number {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1;
+      letter-spacing: var(--tracking-display);
+    }
+    .stat-badge .label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+
+    /* ===== CIRCLE CTA ===== */
+    .circle-cta {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-strong);
+      background: var(--color-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-out-quint);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+    }
+    .circle-cta:hover {
+      background: var(--color-text);
+      border-color: var(--color-text);
+      transform: scale(1.06);
+      box-shadow: var(--shadow-lg);
+    }
+    .circle-cta svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--color-text);
+      fill: none;
+      stroke-width: 2;
+      transition: stroke var(--duration-micro) ease;
+    }
+    .circle-cta:hover svg { stroke: var(--color-surface); }
+    .circle-cta-label {
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      text-align: center;
+      line-height: 1.3;
+    }
+    .circle-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ===== HERO — WIREFRAME LAYOUT ===== */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      max-width: var(--max-width-wide);
+      margin: 0 auto;
+      padding: calc(var(--header-height) + 1.5rem) clamp(1rem, 3vw, 2.5rem) 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      grid-template-rows: auto 1fr;
+      gap: 16px;
+      align-content: center;
+    }
+
+    /* Top-right badge */
+    .hero-badge {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+      align-self: start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: var(--radius-pill);
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,0.5);
+      font-size: var(--text-xs);
+      letter-spacing: 0.06em;
+      color: var(--color-text-secondary);
+      box-shadow: var(--shadow-sm);
+      opacity: 0;
+      animation: heroUp 0.8s var(--ease-out-quint) 0.2s forwards;
+    }
+    .hero-badge .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sage);
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+    @keyframes badgePulse {
+      0%, 100% { opacity: 0.5; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* Right — large image card */
+    .hero-image {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--cream-deep);
+      min-height: 520px;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.85);
+      transition: transform var(--duration-glacial) var(--ease-out-quint);
+    }
+    .hero-image:hover img { transform: scale(1.03); }
+    .hero-image .stat-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 8px 32px rgba(26,20,16,0.12);
+    }
+    .hero-image .stat-badge .number { font-size: var(--text-xl); }
+
+    /* Left-bottom — main headline glass card */
+    .hero-headline {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      align-self: end;
+      padding: clamp(2rem, 4vw, 3rem);
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(28px) saturate(1.5);
+      -webkit-backdrop-filter: blur(28px) saturate(1.5);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+    .hero-eyebrow {
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+      opacity: 0;
+      animation: heroUp 0.8s var(--ease-out-quint) 0.15s forwards;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      font-weight: 600;
+      line-height: 0.92;
+      letter-spacing: var(--tracking-hero);
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroUp 1s var(--ease-out-quint) 0.2s forwards;
+    }
+    @keyframes heroUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-title .accent {
+      color: var(--sage);
+      font-weight: 300;
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-arabic);
+      font-size: var(--text-base);
+      color: var(--gold);
+      direction: rtl;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      animation: heroUp 0.8s var(--ease-out-quint) 0.35s forwards;
+    }
+    .hero-desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      max-width: 380px;
+      line-height: 1.7;
+      letter-spacing: var(--tracking-body);
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: heroUp 0.8s var(--ease-out-quint) 0.45s forwards;
+    }
+    .hero-cta-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: heroUp 0.8s var(--ease-out-quint) 0.55s forwards;
+    }
+    .hero-cta-row .btn-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      border-radius: var(--radius-pill);
+      background: var(--sage);
+      color: #fff;
+      font-size: var(--text-xs);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all var(--duration-fast) ease;
+      box-shadow: 0 4px 20px rgba(139,175,154,0.3);
+    }
+    .hero-cta-row .btn-share:hover {
+      background: #7a9f8a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(139,175,154,0.4);
+    }
+    .hero-cta-row .btn-share svg {
+      width: 16px;
+      height: 16px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+    }
+    .hero-social {
+      display: flex;
+      gap: 8px;
+      margin-top: 1.25rem;
+    }
+    .hero-social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--duration-micro) ease;
+      text-decoration: none;
+    }
+    .hero-social-btn:hover {
+      border-color: var(--color-border-strong);
+      background: rgba(255,255,255,0.8);
+    }
+    .hero-social-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--color-text-muted);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ===== MANIFESTO ===== */
+    .manifesto {
+      padding: clamp(6rem, 14vw, 12rem) clamp(2rem, 6vw, 4rem);
+      position: relative;
+      z-index: 1;
+    }
+    .manifesto-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .manifesto p {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      color: var(--color-text);
+      font-weight: 300;
+      line-height: 1.6;
+      letter-spacing: var(--tracking-display);
+    }
+    .manifesto p em {
+      color: var(--gold);
+      font-style: normal;
+    }
+    .manifesto .ar-text {
+      font-family: var(--font-arabic);
+      font-size: var(--text-base);
+      color: var(--muted-sand);
+      direction: rtl;
+      line-height: 1.9;
+      margin-top: 2rem;
+    }
+
+    /* ===== IMAGE MOSAIC ===== */
+    .mosaic {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 45vh 45vh;
+      gap: 4px;
+      max-width: var(--max-width-wide);
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 3vw, 2.5rem);
+      position: relative;
+      z-index: 1;
+    }
+    .mosaic-cell {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+    }
+    .mosaic-cell:first-child { grid-row: 1 / 3; }
+    .mosaic-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.85);
+      transition: transform var(--duration-glacial) var(--ease-out-quint), filter var(--duration-slow) var(--ease-out-quad);
+    }
+    .mosaic-cell:hover img {
+      transform: scale(1.04);
+      filter: saturate(1);
+    }
+    .mosaic-cell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(26,20,16,0.5) 100%);
+      pointer-events: none;
+    }
+    .mosaic-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      padding: 1.25rem;
+    }
+    .mosaic-caption span {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      color: #fff;
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+    }
+
+    /* ===== MARQUEE ===== */
+    .marquee-strip {
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.5rem 0;
+      overflow: hidden;
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: relative;
+      z-index: 1;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 25s linear infinite;
+    }
+    .marquee-strip:hover .marquee-track { animation-play-state: paused; }
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      font-weight: 300;
+      letter-spacing: var(--tracking-label);
+      color: var(--desert-haze);
+      white-space: nowrap;
+      padding: 0 3rem;
+    }
+    .marquee-sep {
+      color: var(--cream-dark);
+      padding: 0 0.5rem;
+      font-size: 0.6em;
+      vertical-align: middle;
+    }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===== EDITORIAL SECTION ===== */
+    .editorial {
+      padding: clamp(6rem, 14vw, 14rem) clamp(2rem, 6vw, 4rem);
+      position: relative;
+      z-index: 1;
+    }
+    .editorial-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .ed-block {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: clamp(3rem, 7vw, 8rem);
+      align-items: center;
+      margin-bottom: clamp(6rem, 12vw, 10rem);
+    }
+    .ed-block:last-child { margin-bottom: 0; }
+    .ed-block.flip { grid-template-columns: 1fr 1.2fr; }
+    .ed-block.flip .ed-img { order: 2; }
+    .ed-block.flip .ed-text { order: 1; }
+    .ed-img {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+    }
+    .ed-img img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      filter: saturate(0.85);
+      transition: transform var(--duration-glacial) var(--ease-out-quint);
+    }
+    .ed-img:hover img { transform: scale(1.03); }
+    .ed-label {
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .ed-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      color: var(--color-text);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: var(--tracking-title);
+      margin-bottom: 1.5rem;
+    }
+    .ed-body {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      letter-spacing: var(--tracking-body);
+      max-width: 440px;
+    }
+    .ed-ar {
+      font-family: var(--font-arabic);
+      font-size: var(--text-sm);
+      color: var(--desert-haze);
+      direction: rtl;
+      margin-top: 1.5rem;
+      line-height: 1.9;
+    }
+
+    /* ===== HORIZONTAL IMAGE STRIP ===== */
+    .img-strip {
+      display: flex;
+      gap: 4px;
+      overflow: hidden;
+      height: 38vh;
+      min-height: 260px;
+      padding: 0 clamp(1rem, 3vw, 2.5rem);
+      max-width: var(--max-width-wide);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .img-strip-cell {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      border-radius: var(--radius-lg);
+    }
+    .img-strip-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.8);
+      transition: transform var(--duration-glacial) var(--ease-out-quint), filter var(--duration-slow) var(--ease-out-quad);
+    }
+    .img-strip-cell:hover img {
+      transform: scale(1.06);
+      filter: saturate(1);
+    }
+
+    /* ===== PEOPLE ===== */
+    .people-section {
+      padding: clamp(6rem, 14vw, 14rem) clamp(2rem, 6vw, 4rem);
+      background: var(--color-bg-alt);
+      position: relative;
+      z-index: 1;
+    }
+    .people-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .people-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+    .people-header h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 300;
+      color: var(--color-text);
+      line-height: 1.1;
+      letter-spacing: var(--tracking-display);
+    }
+    .people-header p {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      max-width: 360px;
+      justify-self: end;
+    }
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1rem, 2vw, 1.5rem);
+    }
+    .person-card {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      padding: clamp(2rem, 3vw, 2.5rem);
+      border-radius: var(--radius-xl);
+      transition: border-color var(--duration-fast) var(--ease-out-quad), transform var(--duration-normal) var(--ease-out-quint), box-shadow var(--duration-normal) var(--ease-out-quad);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .person-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--gold);
+      border-radius: 3px 0 0 3px;
+      transition: height var(--duration-slow) var(--ease-out);
+    }
+    .person-card:hover {
+      border-color: var(--color-border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .person-card:hover::before { height: 100%; }
+    .person-name {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--color-text);
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+    .person-role {
+      font-size: var(--text-xs);
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .person-bio {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      letter-spacing: var(--tracking-body);
+    }
+
+    /* ===== FULL-BLEED PARALLAX ===== */
+    .fullbleed {
+      position: relative;
+      height: 60vh;
+      min-height: 400px;
+      overflow: hidden;
+      border-radius: 0;
+    }
+    .fullbleed img {
+      width: 100%;
+      height: 130%;
+      object-fit: cover;
+      position: absolute;
+      top: -15%;
+      left: 0;
+      filter: saturate(0.6) brightness(0.45);
+      will-change: transform;
+    }
+    .fullbleed-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      text-align: center;
+    }
+    .fullbleed-overlay h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      color: #fff;
+      font-weight: 300;
+      letter-spacing: var(--tracking-display);
+    }
+    .fullbleed-overlay .ar-place {
+      font-family: var(--font-arabic);
+      font-size: var(--text-lg);
+      color: var(--gold-bright);
+      direction: rtl;
+      margin-top: 0.5rem;
+    }
+
+    /* ===== X / TWITTER FEED ===== */
+    .xfeed-section {
+      padding: clamp(6rem, 14vw, 14rem) 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+    .xfeed-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 clamp(2rem, 6vw, 4rem);
+    }
+    .xfeed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .xfeed-scroll {
+      display: flex;
+      gap: clamp(1rem, 2vw, 1.25rem);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 1.5rem;
+      margin: 0 calc(-1 * clamp(2rem, 6vw, 4rem));
+      padding-left: clamp(2rem, 6vw, 4rem);
+      padding-right: clamp(2rem, 6vw, 4rem);
+      scrollbar-width: thin;
+      scrollbar-color: var(--cream-dark) transparent;
+    }
+    .xfeed-scroll::-webkit-scrollbar { height: 4px; }
+    .xfeed-scroll::-webkit-scrollbar-track { background: transparent; }
+    .xfeed-scroll::-webkit-scrollbar-thumb {
+      background: var(--cream-dark);
+      border-radius: 4px;
+    }
+    .xfeed-card {
+      flex: 0 0 340px;
+      scroll-snap-align: start;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 2vw, 1.75rem);
+      transition: border-color var(--duration-fast) var(--ease-out-quad), transform var(--duration-normal) var(--ease-out-quint), box-shadow var(--duration-normal) var(--ease-out-quad);
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .xfeed-card:hover {
+      border-color: var(--color-border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .xfeed-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .xfeed-handle {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+    .xfeed-time {
+      font-size: var(--text-xs);
+      color: var(--desert-haze);
+    }
+    .xfeed-text {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      letter-spacing: var(--tracking-body);
+      margin-bottom: 1rem;
+    }
+    .xfeed-card:last-child .xfeed-text:last-child { margin-bottom: 0; }
+    .xfeed-img {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .xfeed-img img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: saturate(0.85);
+      transition: transform var(--duration-glacial) var(--ease-out-quint), filter var(--duration-slow) var(--ease-out-quad);
+    }
+    .xfeed-card:hover .xfeed-img img {
+      transform: scale(1.04);
+      filter: saturate(1);
+    }
+
+    /* ===== REVENUE (on alt bg) ===== */
+    .revenue-section {
+      background: var(--color-bg-alt);
+      padding: clamp(6rem, 14vw, 14rem) clamp(2rem, 6vw, 4rem);
+      position: relative;
+      z-index: 1;
+    }
+    .revenue-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .rev-header {
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+    .rev-header .label {
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .rev-header h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--color-text);
+      font-weight: 300;
+    }
+    .rev-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .rev-cell {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      border-radius: var(--radius-xl);
+      transition: transform var(--duration-normal) var(--ease-out-quint), box-shadow var(--duration-normal) var(--ease-out-quad);
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .rev-cell:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .rev-cell h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--color-text);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      letter-spacing: var(--tracking-title);
+    }
+    .rev-cell p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      letter-spacing: var(--tracking-body);
+    }
+    .rev-cell .planned {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--desert-haze);
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      background: var(--color-bg);
+      padding: clamp(6rem, 14vw, 12rem) 2rem;
+      text-align: center;
+      border-top: 1px solid var(--color-border);
+      position: relative;
+      z-index: 1;
+    }
+    .cta-section h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--color-text);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+    .cta-email {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: 2.5rem;
+      display: block;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        min-height: auto;
+        gap: 12px;
+      }
+      .hero-badge { grid-column: 1; grid-row: 1; }
+      .hero-image { grid-column: 1; grid-row: 1; min-height: 340px; }
+      .hero-headline { grid-column: 1; grid-row: 2; }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        min-height: auto;
+        padding-top: calc(var(--header-height) + 1rem);
+      }
+      .hero-badge { display: none; }
+      .hero-image { grid-column: 1; grid-row: 1; min-height: 260px; }
+      .hero-headline { grid-column: 1; grid-row: 2; }
+      .mosaic {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 35vh 25vh;
+      }
+      .mosaic-cell:first-child { grid-row: auto; }
+      .ed-block, .ed-block.flip {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .ed-block.flip .ed-img { order: 0; }
+      .ed-block.flip .ed-text { order: 0; }
+      .img-strip { flex-direction: column; height: auto; }
+      .img-strip-cell { height: 30vh; }
+      .people-header { grid-template-columns: 1fr; gap: 1rem; }
+      .people-header p { justify-self: start; }
+      .people-grid { grid-template-columns: 1fr; }
+      .rev-grid { grid-template-columns: 1fr; }
+      .fullbleed { height: 45vh; min-height: 300px; }
+      .xfeed-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .xfeed-card { flex: 0 0 280px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sage Bandage Strips — scattered geometric background -->
+<div class="strips-bg" aria-hidden="true" id="stripsBg">
+  <div class="strip strip--solid strip-1"></div>
+  <div class="strip strip--outline strip-2"></div>
+  <div class="strip strip--solid strip-3"></div>
+  <div class="strip strip--outline strip-4"></div>
+  <div class="strip strip--solid strip-5"></div>
+  <div class="strip strip--outline strip-6"></div>
+  <div class="strip strip--solid strip-7"></div>
+  <div class="strip strip--outline strip-8"></div>
+  <div class="strip strip--solid strip-9"></div>
+  <div class="strip strip--outline strip-10"></div>
+  <div class="strip strip--solid strip-11"></div>
+  <div class="strip strip--outline strip-12"></div>
+  <div class="strip strip--solid strip-13"></div>
+  <div class="strip strip--outline strip-14"></div>
+  <div class="strip strip--solid strip-15"></div>
+  <div class="strip strip--outline strip-16"></div>
+</div>
+
+<!-- Page Loader -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-mark">SF</div>
+</div>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- Navigation -->
+<nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-logo">SUPER FIGURE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#editorial">Work</a></li>
+      <li><a href="#people">People</a></li>
+      <li><a href="#feed">Feed</a></li>
+      <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#editorial">Work</a>
+  <a href="#people">People</a>
+  <a href="#feed">Feed</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main id="main">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="about">
+
+    <!-- Top-right badge -->
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Open for Submissions
+    </div>
+
+    <!-- Right — large image -->
+    <div class="hero-image">
+      <img src="assets/images/editorial-portrait.png" alt="Editorial portrait" loading="eager">
+      <div class="stat-badge">
+        <div class="number">50+</div>
+        <div class="label">Stories published<br>across the Gulf</div>
+      </div>
+    </div>
+
+    <!-- Left-bottom — headline card -->
+    <div class="hero-headline">
+      <span class="hero-eyebrow">Super Figure</span>
+      <h1 class="hero-title">Call <span class="accent">for</span><br>Innovator</h1>
+      <p class="hero-subtitle" lang="ar">نداء للمبتكرين</p>
+      <p class="hero-desc">We amplify the stories that shape the Gulf's future — tech founders, racing teams, artists, and brands building what's next.</p>
+      <div class="hero-cta-row">
+        <a href="mailto:jacques.mak@manhattanxholding.com" class="btn-share">
+          Share your Story
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+        <a href="#editorial" class="btn btn-outline" style="border-radius:var(--radius-pill);">Explore</a>
+      </div>
+      <div class="hero-social">
+        <a href="mailto:jacques.mak@manhattanxholding.com" class="hero-social-btn" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+        <a href="https://x.com" target="_blank" rel="noopener" class="hero-social-btn" aria-label="X / Twitter">
+          <svg viewBox="0 0 24 24"><path d="M4 20L20 4M4 4l6.5 8M20 20l-6.5-8"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== IMAGE MOSAIC ===== -->
+  <div class="mosaic reveal" aria-label="What we cover">
+    <div class="mosaic-cell reveal-scale">
+      <img src="assets/images/tech-summit.jpg" alt="Tech summit" loading="lazy">
+      <div class="mosaic-caption"><span>Summits</span></div>
+    </div>
+    <div class="mosaic-cell reveal reveal-delay-1">
+      <img src="assets/images/microphone.jpg" alt="Podcast" loading="lazy">
+      <div class="mosaic-caption"><span>Dialogue</span></div>
+    </div>
+    <div class="mosaic-cell reveal reveal-delay-2">
+      <img src="assets/images/gulf-skyline.jpg" alt="Gulf skyline" loading="lazy">
+      <div class="mosaic-caption"><span>Gulf</span></div>
+    </div>
+    <div class="mosaic-cell reveal reveal-delay-3">
+      <img src="assets/images/luxury-car.jpg" alt="Luxury automotive" loading="lazy">
+      <div class="mosaic-caption"><span>Automotive</span></div>
+    </div>
+    <div class="mosaic-cell reveal reveal-delay-4">
+      <img src="assets/images/tech-crowd.jpg" alt="Tech event crowd" loading="lazy">
+      <div class="mosaic-caption"><span>Events</span></div>
+    </div>
+  </div>
+
+  <!-- ===== MANIFESTO ===== -->
+  <section class="manifesto">
+    <div class="manifesto-inner reveal">
+      <p>
+        We don't publish content.<br>
+        We build <em>context</em>.
+      </p>
+      <p style="margin-top:2.5rem;">
+        For tech companies, racing teams, artists, and brands —<br>
+        we turn their stories into reach.
+      </p>
+      <p class="ar-text" lang="ar">
+        لا ننشر محتوى. نبني سياقاً.<br>
+        لشركات التقنية وفرق السباقات والفنانين والعلامات التجارية — نحوّل قصصهم إلى تأثير.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Tech Summits<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Motorsport<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Brand Collabs<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">SF Dialogues<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Documentary<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Creator Platform<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">AI Advisory<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Tech Summits<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Motorsport<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Brand Collabs<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">SF Dialogues<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Documentary<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Creator Platform<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">AI Advisory<span class="marquee-sep">◆</span></span>
+    </div>
+  </div>
+
+  <!-- ===== THE PLATFORM — EDITORIAL ===== -->
+  <section class="editorial" id="editorial">
+    <div class="editorial-inner">
+
+      <div class="ed-block">
+        <div class="ed-img reveal-left">
+          <img src="assets/images/filmmaker.jpg" alt="Content creation" loading="lazy">
+        </div>
+        <div class="ed-text reveal-right">
+          <span class="ed-label">The Platform</span>
+          <h2 class="ed-title">Write it. Film it.<br>Host it. Own it.</h2>
+          <p class="ed-body">A UGC platform where creators publish long-form essays, cinematic documentaries, and podcast series. Think editorial depth meets social reach — focused on Gulf tech, racing, travel, and the people behind it all.</p>
+          <p class="ed-ar" lang="ar">منصّة UGC للمبدعين: مقالات معمّقة، أفلام وثائقية، وبودكاست — تجمع العمق التحريري مع الوصول الاجتماعي.</p>
+        </div>
+      </div>
+
+      <div class="ed-block flip">
+        <div class="ed-text reveal-left">
+          <span class="ed-label">SF Dialogues</span>
+          <h2 class="ed-title">The interview<br>that goes<br>somewhere.</h2>
+          <p class="ed-body">Weekly conversations with tech founders, racing drivers, and investors — filmed in real places. A studio. A restaurant. On the road. Entertainment meets substance.</p>
+          <p class="ed-ar" lang="ar">حوارات أسبوعية مع مؤسسي التقنية وسائقي السباقات والمستثمرين — تُصوَّر في أماكن حقيقية. ترفيه يلتقي بالجوهر.</p>
+        </div>
+        <div class="ed-img reveal-right">
+          <img src="assets/images/interview-mics.jpg" alt="SF Dialogues podcast" loading="lazy">
+        </div>
+      </div>
+
+      <div class="ed-block">
+        <div class="ed-img reveal-left">
+          <img src="assets/images/event-lights.jpg" alt="Brand events and summits" loading="lazy">
+        </div>
+        <div class="ed-text reveal-right">
+          <span class="ed-label">Amplification</span>
+          <h2 class="ed-title">Summits. Events.<br>Brand collabs.</h2>
+          <p class="ed-body">We partner with tech companies, sporting events, and cultural brands to co-create media that extends their reach. From Saudi tech summits to international racing circuits.</p>
+          <p class="ed-ar" lang="ar">نشارك شركات التقنية والفعاليات الرياضية والعلامات الثقافية لإنتاج محتوى يوسّع تأثيرها — من قمم التقنية السعودية إلى حلبات السباق الدولية.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== IMAGE STRIP ===== -->
+  <div class="img-strip" aria-label="Visual gallery">
+    <div class="img-strip-cell"><img src="assets/images/racing-car.jpg" alt="Motorsport" loading="lazy"></div>
+    <div class="img-strip-cell"><img src="assets/images/stadium.jpg" alt="Sports venue" loading="lazy"></div>
+    <div class="img-strip-cell"><img src="assets/images/ai-abstract.jpg" alt="AI technology" loading="lazy"></div>
+    <div class="img-strip-cell"><img src="assets/images/podcast-studio.jpg" alt="Podcast studio" loading="lazy"></div>
+  </div>
+
+  <!-- ===== X / TWITTER FEED ===== -->
+  <section class="xfeed-section" id="feed">
+    <div class="xfeed-inner">
+      <div class="xfeed-header reveal">
+        <div>
+          <span class="ed-label" style="margin-bottom:0.75rem;">Live</span>
+          <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); font-weight:300; color:var(--color-text);">What we're saying.</h2>
+        </div>
+        <a href="https://x.com" target="_blank" rel="noopener" class="btn btn-outline" style="border-radius:var(--radius-pill); padding:10px 24px;">Follow @SuperFigure</a>
+      </div>
+      <div class="xfeed-scroll">
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">2h</span>
+          </div>
+          <p class="xfeed-text">Just wrapped filming Episode 01 of SF Dialogues. Three cameras. One table. A founder who built a $2B company from a dorm room. Dropping next week.</p>
+          <div class="xfeed-img"><img src="assets/images/podcast-studio.jpg" alt="SF Dialogues podcast studio with three-camera setup" loading="lazy"></div>
+        </div>
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">8h</span>
+          </div>
+          <p class="xfeed-text">On the ground at LEAP 2026 in Riyadh. 172,000 attendees. We're here to cover what happens after the keynotes end.</p>
+          <div class="xfeed-img"><img src="assets/images/tech-summit.jpg" alt="LEAP 2026 tech summit in Riyadh" loading="lazy"></div>
+        </div>
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">1d</span>
+          </div>
+          <p class="xfeed-text">Maffi Racing just signed their 21st driver. We've been documenting the journey since driver number 3. The long-form piece drops this Thursday.</p>
+          <div class="xfeed-img"><img src="assets/images/f1-track.jpg" alt="Maffi Racing driver on circuit" loading="lazy"></div>
+        </div>
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">2d</span>
+          </div>
+          <p class="xfeed-text">New essay on the platform: "Why the Gulf's esports scene will outpace Europe by 2028." Written by a creator in our incubator program. Read it free.</p>
+        </div>
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">3d</span>
+          </div>
+          <p class="xfeed-text">Min-Liang Tan told us something off-camera that changed how we think about AI and creativity. More in SF Dialogues Ep. 02.</p>
+          <div class="xfeed-img"><img src="assets/images/esports.jpg" alt="Esports gaming arena" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PEOPLE ===== -->
+  <section class="people-section" id="people">
+    <div class="people-inner">
+      <div class="people-header reveal">
+        <h2>Conversations<br>we're starting.</h2>
+        <p>Founders, racers, and chroniclers whose stories we want to tell.</p>
+      </div>
+
+      <div class="people-grid">
+        <div class="person-card reveal reveal-delay-1">
+          <div class="person-name">Min-Liang Tan</div>
+          <div class="person-role">CEO & Creative Director, Razer</div>
+          <p class="person-bio">Built Razer from a single gaming mouse into a global technology company across 150+ countries. Believes AI should empower, not replace, human creativity.</p>
+        </div>
+        <div class="person-card reveal reveal-delay-2">
+          <div class="person-name">Alex Thouvenin</div>
+          <div class="person-role">Co-founder, Maffi Racing</div>
+          <p class="person-bio">Motorsport operator at the intersection of sport, technology and investment. 10+ race victories, two runner-up titles, drivers from four continents.</p>
+        </div>
+        <div class="person-card reveal reveal-delay-3">
+          <div class="person-name">Andrew Frankel</div>
+          <div class="person-role">Co-founder, The Intercooler</div>
+          <p class="person-bio">30 years in automotive journalism. Co-founded the world's only ad-free online automotive magazine. Juror of the European Car of the Year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FULL-BLEED PARALLAX ===== -->
+  <section class="fullbleed" aria-label="Headquarters">
+    <img src="assets/images/city-night-aerial.jpg" alt="Saudi Arabia" loading="lazy" id="parallaxImg">
+    <div class="fullbleed-overlay">
+      <div>
+        <h2>Based in Saudi Arabia.</h2>
+        <p class="ar-place" lang="ar">المملكة العربية السعودية</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVENUE ===== -->
+  <section class="revenue-section">
+    <div class="revenue-inner">
+      <div class="rev-header reveal">
+        <span class="label">How it works</span>
+        <h2>Six ways we sustain the work.</h2>
+      </div>
+      <div class="rev-grid">
+        <div class="rev-cell reveal reveal-delay-1">
+          <h3>Subscriptions</h3>
+          <p>A paid community. Content co-creation. Private events.</p>
+        </div>
+        <div class="rev-cell reveal reveal-delay-2">
+          <h3>Research</h3>
+          <p>Commissioned analysis for tech companies and event organizers.</p>
+        </div>
+        <div class="rev-cell reveal reveal-delay-3">
+          <h3>Equity</h3>
+          <p>When our coverage builds a company, we participate.</p>
+        </div>
+        <div class="rev-cell reveal reveal-delay-1">
+          <h3>Partnerships</h3>
+          <p>Co-branded media at Gulf sporting events and tech summits.</p>
+        </div>
+        <div class="rev-cell reveal reveal-delay-2">
+          <h3>Referrals</h3>
+          <p>Connecting founders to institutional investors.</p>
+        </div>
+        <div class="rev-cell reveal reveal-delay-3">
+          <h3>Data</h3>
+          <p>Verified fact infrastructure for media and research.</p>
+          <span class="planned">Planned</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-section" id="contact">
+    <div class="reveal">
+      <h2>Interested?</h2>
+      <span class="cta-email">jacques.mak@manhattanxholding.com</span>
+      <a href="mailto:jacques.mak@manhattanxholding.com" class="btn btn-primary" style="border-radius:var(--radius-pill); padding: 16px 48px;">Get in touch</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner" style="grid-template-columns: 1fr 1fr;">
+    <div>
+      <div class="footer-brand" style="font-size:var(--text-lg);">Super Figure</div>
+      <p class="footer-desc" lang="ar" style="font-family:var(--font-arabic); direction:rtl; margin-top:0.5rem;">سوبر فيغر</p>
+    </div>
+    <div style="text-align:right;">
+      <ul class="footer-links" style="align-items:flex-end;">
+        <li><a href="#editorial">Work</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="mailto:jacques.mak@manhattanxholding.com">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 Super Figure</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+
+<!-- Parallax -->
+<script>
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const img = document.getElementById('parallaxImg');
+  if (!img) return;
+  const section = img.closest('.fullbleed');
+  window.addEventListener('scroll', () => {
+    const rect = section.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+    img.style.transform = `translateY(${(progress - 0.5) * 100}px)`;
+  }, { passive: true });
+})();
+</script>
+
+<!-- Sage Strips — Mouse Organic Distortion -->
+<script>
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const strips = document.querySelectorAll('.strip');
+  if (!strips.length) return;
+
+  // Cache each strip's base rotation and center position
+  const stripData = [];
+  function cachePositions() {
+    stripData.length = 0;
+    strips.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      // Extract base rotation from the class-set transform
+      const style = window.getComputedStyle(el);
+      const matrix = style.transform;
+      let baseAngle = 0;
+      if (matrix && matrix !== 'none') {
+        const values = matrix.match(/matrix\(([^)]+)\)/);
+        if (values) {
+          const parts = values[1].split(',').map(Number);
+          baseAngle = Math.atan2(parts[1], parts[0]) * (180 / Math.PI);
+        }
+      }
+      stripData.push({
+        el,
+        cx: rect.left + rect.width / 2,
+        cy: rect.top + rect.height / 2 + window.scrollY,
+        baseAngle,
+        w: rect.width
+      });
+    });
+  }
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ticking = false;
+
+  cachePositions();
+  window.addEventListener('resize', cachePositions);
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY + window.scrollY;
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateStrips);
+    }
+  }, { passive: true });
+
+  function updateStrips() {
+    const radius = 400; // influence radius in px
+    stripData.forEach((s) => {
+      const dx = mouseX - s.cx;
+      const dy = mouseY - s.cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const influence = Math.max(0, 1 - dist / radius);
+      // Organic distortion: slight rotation, translate, and scale shift
+      const rotateOffset = influence * 8 * Math.sign(dx);
+      const tx = influence * dx * 0.04;
+      const ty = influence * dy * 0.03;
+      const scaleX = 1 + influence * 0.06;
+      s.el.style.transform = `rotate(${s.baseAngle + rotateOffset}deg) translate(${tx}px, ${ty}px) scaleX(${scaleX})`;
+    });
+    ticking = false;
+  }
+
+  // Recache on scroll for accurate Y positions
+  let scrollTimer;
+  window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(cachePositions, 200);
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>

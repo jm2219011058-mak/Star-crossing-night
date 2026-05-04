@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Super Figure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #FAF7F2;
+      color: #1A1410;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { padding: 2rem; }
+    .code {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 8rem);
+      font-weight: 300;
+      color: #C4935A;
+    }
+    .msg {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 300;
+      color: #8C7A62;
+      margin: 1rem 0 0.5rem;
+    }
+    .msg-ar {
+      font-family: 'Noto Naskh Arabic', serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: #8C7A62;
+      direction: rtl;
+      margin-bottom: 2rem;
+    }
+    a {
+      display: inline-block;
+      color: #1A1410;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(26,20,16,0.2);
+      padding: 12px 32px;
+      border-radius: 100px;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      background: #1A1410;
+      color: #FAF7F2;
+      border-color: #1A1410;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="code">404</div>
+    <p class="msg">This page hasn't been written yet.</p>
+    <p class="msg-ar" lang="ar">هذه الصفحة لم تُكتب بعد</p>
+    <a href="index.html">Return Home</a>
+  </div>
+</body>
+</html>

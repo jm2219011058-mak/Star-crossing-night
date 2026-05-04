@@ -1,0 +1,128 @@
+/* Voice of Vision — Design System (Light Theme)
+   Tokens derived from Linear.app + Monocle.com + Cereen extraction,
+   fused with VoV brand DNA — warm cream palette */
+:root {
+  /* ── Typography ── */
+  --font-display: 'Cormorant Garamond', serif;
+  --font-arabic: 'Noto Naskh Arabic', 'Amiri', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Type Scale */
+  --text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
+  --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
+  --text-base: clamp(0.95rem, 0.88rem + 0.35vw, 1.1rem);
+  --text-lg: clamp(1.15rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.4rem, 1.1rem + 1.5vw, 2rem);
+  --text-2xl: clamp(1.8rem, 1.3rem + 2.5vw, 3rem);
+  --text-3xl: clamp(2.2rem, 1.5rem + 3.5vw, 4rem);
+  --text-hero: clamp(2.8rem, 1.8rem + 5vw, 6rem);
+
+  /* Tracking — Linear + OpenClaw fusion */
+  --tracking-hero: -0.03em;
+  --tracking-display: -0.02em;
+  --tracking-title: -0.015em;
+  --tracking-body: -0.01em;
+  --tracking-label: 0.15em;
+
+  /* ── Warm Cream Palette ── */
+  --cream: #FAF7F2;
+  --cream-deep: #F2ECE4;
+  --cream-dark: #E8E1D8;
+  --warm-white: #FFFFFF;
+  --linen: #F5F0E8;
+
+  /* Browns (text hierarchy) */
+  --night-earth: #1A1410;
+  --deep-umber: #2D2420;
+  --bark: #4A3D30;
+  --earth-shadow: #5C4A38;
+  --slate-warm: #6B5D4F;
+  --muted-sand: #8C7A62;
+  --desert-haze: #B5A38D;
+
+  /* Gold system */
+  --gold: #C4935A;
+  --gold-bright: #D4A055;
+  --gold-dim: #A67D4A;
+  --gold-soft: rgba(196, 147, 90, 0.10);
+  --gold-soft-strong: rgba(196, 147, 90, 0.18);
+
+  /* Accent — warm sage (Cereen-inspired complement to gold) */
+  --sage: #8BAF9A;
+  --sage-soft: rgba(139, 175, 154, 0.12);
+  --sage-strong: rgba(139, 175, 154, 0.22);
+
+  /* ── Semantic Tokens ── */
+  --color-bg: #FAF7F2;
+  --color-bg-alt: #F2ECE4;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+  --color-surface-muted: #F5F0E8;
+  --color-text: #1A1410;
+  --color-text-secondary: #4A3D30;
+  --color-text-muted: #8C7A62;
+  --color-text-faint: #B5A38D;
+  --color-border: rgba(26, 20, 16, 0.08);
+  --color-border-hover: rgba(26, 20, 16, 0.15);
+  --color-border-strong: rgba(26, 20, 16, 0.22);
+
+  /* Inverted (for dark sections like footer) */
+  --color-bg-dark: #1A1410;
+  --color-surface-dark: #2D2420;
+  --color-text-on-dark: #F5EDE0;
+  --color-text-muted-on-dark: #B5A38D;
+  --color-border-dark: rgba(212, 160, 85, 0.12);
+
+  /* ── Spacing Scale (4px base) ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ── Layout ── */
+  --max-width: 1200px;
+  --max-width-narrow: 800px;
+  --max-width-wide: 1400px;
+  --header-height: 72px;
+
+  /* Border Radius (Cereen: generous rounds) */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 100px;
+
+  /* ── Shadows (light theme — soft, layered) ── */
+  --shadow-xs: 0 1px 2px rgba(26, 20, 16, 0.04);
+  --shadow-sm: 0 2px 8px rgba(26, 20, 16, 0.06);
+  --shadow-md: 0 4px 16px rgba(26, 20, 16, 0.08);
+  --shadow-lg: 0 8px 32px rgba(26, 20, 16, 0.10);
+  --shadow-xl: 0 16px 48px rgba(26, 20, 16, 0.12);
+  --shadow-card: 0 2px 12px rgba(26, 20, 16, 0.06);
+  --shadow-card-hover: 0 8px 28px rgba(26, 20, 16, 0.10), 0 2px 8px rgba(26, 20, 16, 0.04);
+  --shadow-bento: 0 1px 3px rgba(26, 20, 16, 0.04), 0 4px 12px rgba(26, 20, 16, 0.03);
+
+  /* ── Easing Curves (Linear.app-extracted) ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ── Transition Timing ── */
+  --duration-micro: 150ms;
+  --duration-fast: 250ms;
+  --duration-normal: 400ms;
+  --duration-slow: 600ms;
+  --duration-glacial: 1200ms;
+}

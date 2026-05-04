@@ -1,0 +1,112 @@
+/* Voice of Vision — Base Reset & Typography (Light Theme) */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--warm-white);
+}
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: color var(--duration-micro) var(--ease-out-quad);
+}
+
+a:hover {
+  color: var(--gold-dim);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--text-hero); letter-spacing: var(--tracking-hero); line-height: 1; }
+h2 { font-size: var(--text-3xl); letter-spacing: var(--tracking-display); }
+h3 { font-size: var(--text-2xl); letter-spacing: var(--tracking-title); }
+h4 { font-size: var(--text-xl); letter-spacing: var(--tracking-title); }
+
+p {
+  font-size: var(--text-base);
+  line-height: 1.65;
+  letter-spacing: var(--tracking-body);
+  color: var(--color-text-muted);
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 10000;
+  padding: 1rem 2rem;
+  background: var(--gold);
+  color: var(--warm-white);
+  font-size: var(--text-sm);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cream-dark);
+  border-radius: 3px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
