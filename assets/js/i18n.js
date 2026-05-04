@@ -19,7 +19,7 @@ const SF_I18N = {
 
       // Hero
       'hero.eyebrow': 'Voice of Vision',
-      'hero.title': 'Call <span class="accent">for</span><br>Innovator',
+      'hero.title': 'Call for<br>Innovators',
       'hero.subtitle': 'نداء للمبتكرين',
       'hero.desc': "We amplify the stories that shape the Gulf's future — tech founders, racing teams, artists, and brands building what's next.",
 
@@ -148,7 +148,7 @@ const SF_I18N = {
 
       'about.card3.name': 'Jamie Zhang',
       'about.card3.role': 'Co-Founder & CEO',
-      'about.card3.bio': 'MIT graduate, former McKinsey Senior Engagement Manager. Co-founded Masdar Investment LLC with Oman Royal Families. Founded IRX Fin (RMB 10B angel funding).',
+      'about.card3.bio': 'MIT graduate, former McKinsey Senior Engagement Manager. Co-founded Masdar Investment LLC with Oman Royal Families. Founded IRX Fin — cross-border fintech.',
       'about.card3.more': 'Learn more',
 
       // Modals
@@ -164,7 +164,7 @@ const SF_I18N = {
       'modal2.role1': 'As Creative Director, Jacques sets the visual language, editorial tone, and experience design across every Super Figure touchpoint. From the identity system and brand architecture to content production and digital product, he owns the end-to-end creative standard.',
 
       'modal3.bg1': 'MIT graduate and former McKinsey Senior Engagement Manager, Jamie brings elite strategic consulting experience to Super Figure. Her career spans high-stakes advisory work across industries, sharpening her ability to architect scalable business models and drive organizational transformation at speed.',
-      'modal3.bg2': 'Jamie co-founded Masdar Investment LLC in partnership with Oman Royal Families, navigating sovereign wealth and cross-border investment at the highest levels of Gulf finance. She also founded IRX Fin, a fintech venture that secured RMB 10 billion in angel funding — a testament to her capital-raising acumen and deep network across Chinese and Middle Eastern financial ecosystems.',
+      'modal3.bg2': 'Jamie co-founded Masdar Investment LLC in partnership with Oman Royal Families, navigating sovereign wealth and cross-border investment at the highest levels of Gulf finance. She also founded IRX Fin, a fintech venture operating across Chinese and Middle Eastern financial ecosystems — leveraging her deep cross-border network and capital markets expertise.',
       'modal3.role1': "As CEO of Super Figure, Jamie orchestrates the company's commercial strategy, partnership architecture, and market expansion. Her rare ability to bridge East and West — connecting Chinese capital networks with Gulf market opportunity — gives Super Figure a decisive edge in building a truly global media house rooted in the region.",
 
       'about.cta.title': 'Work with us',
@@ -181,7 +181,7 @@ const SF_I18N = {
 
       // Hero
       'hero.eyebrow': 'Voice of Vision',
-      'hero.title': 'نداء<br><span class="accent">للمبتكرين</span>',
+      'hero.title': 'نداء<br>للمبتكرين',
       'hero.subtitle': 'Call for Innovator',
       'hero.desc': 'نُضخّم القصص التي تشكّل مستقبل الخليج — مؤسسو التقنية، فرق السباقات، الفنانون، والعلامات التجارية التي تبني ما هو قادم.',
 
@@ -310,7 +310,7 @@ const SF_I18N = {
 
       'about.card3.name': 'جيمي تشانغ',
       'about.card3.role': 'شريكة مؤسسة ورئيسة تنفيذية',
-      'about.card3.bio': 'خريجة MIT، مديرة مشاركة أولى سابقة في McKinsey. شاركت في تأسيس Masdar Investment LLC مع العائلات الملكية العمانية. أسست IRX Fin (تمويل ملائكي ١٠ مليار يوان).',
+      'about.card3.bio': 'خريجة MIT، مديرة مشاركة أولى سابقة في McKinsey. شاركت في تأسيس Masdar Investment LLC مع العائلات الملكية العمانية. أسست IRX Fin — تقنية مالية عابرة للحدود.',
       'about.card3.more': 'اقرأ المزيد',
 
       // Modals
@@ -326,7 +326,7 @@ const SF_I18N = {
       'modal2.role1': 'بصفته المدير الإبداعي، يحدد جاك اللغة البصرية والنبرة التحريرية وتصميم التجربة عبر كل نقطة اتصال في سوبر فيغر. من نظام الهوية والبنية المعمارية للعلامة إلى إنتاج المحتوى والمنتج الرقمي.',
 
       'modal3.bg1': 'خريجة MIT ومديرة مشاركة أولى سابقة في McKinsey، تجلب جيمي خبرة استشارية استراتيجية نخبوية إلى سوبر فيغر. يمتد مسارها المهني عبر عمل استشاري عالي المخاطر في صناعات متعددة، مما صقل قدرتها على بناء نماذج أعمال قابلة للتوسع.',
-      'modal3.bg2': 'شاركت جيمي في تأسيس Masdar Investment LLC بالشراكة مع العائلات الملكية العمانية. كما أسست IRX Fin، مشروع تقنية مالية حصل على تمويل ملائكي بقيمة ١٠ مليار يوان صيني — دليل على براعتها في جمع رأس المال وشبكتها العميقة.',
+      'modal3.bg2': 'شاركت جيمي في تأسيس Masdar Investment LLC بالشراكة مع العائلات الملكية العمانية. كما أسست IRX Fin، مشروع تقنية مالية يعمل عبر الأنظمة المالية الصينية والشرق أوسطية — مستفيدةً من شبكتها العميقة العابرة للحدود وخبرتها في أسواق رأس المال.',
       'modal3.role1': 'بصفتها الرئيسة التنفيذية لسوبر فيغر، تقود جيمي الاستراتيجية التجارية للشركة وهيكلة الشراكات والتوسع في الأسواق. قدرتها النادرة على الربط بين الشرق والغرب تمنح سوبر فيغر ميزة حاسمة في بناء مؤسسة إعلامية عالمية متجذرة في المنطقة.',
 
       'about.cta.title': 'اعمل معنا',

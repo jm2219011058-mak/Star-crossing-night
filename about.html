@@ -11,7 +11,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500&family=JetBrains+Mono:wght@300;400&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@300;400&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
   <link rel="stylesheet" href="styles/variables.css">
@@ -581,20 +581,52 @@
     /* ===== LANG TOGGLE ===== */
     .nav-lang-btn {
       background: none;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-pill);
-      padding: 4px 14px;
-      font-size: 0.7rem;
+      border: none;
+      padding: 0;
+      font-size: 0.65rem;
       letter-spacing: 0.04em;
-      color: var(--color-text-secondary);
+      color: var(--color-text-muted);
       cursor: pointer;
       transition: all var(--duration-fast) ease;
       font-family: 'Noto Naskh Arabic', var(--font-body);
     }
     .nav-lang-btn:hover {
+      color: var(--color-text);
+    }
+    .nav-right-mobile {
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* About page — light bg, nav uses scrolled appearance */
+    .site-nav {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(28px) saturate(1.5);
+      -webkit-backdrop-filter: blur(28px) saturate(1.5);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+    .nav-tags a {
+      color: var(--color-text-muted);
+    }
+    .nav-tags a::after {
+      background: var(--color-text);
+    }
+    .nav-tags a:hover,
+    .nav-tags a.active {
+      color: var(--color-text);
+    }
+    .nav-actions .nav-cta {
+      color: var(--color-text);
+      border-color: var(--color-border-strong);
+    }
+    .nav-actions .nav-cta:hover {
       background: var(--color-text);
       color: var(--color-surface);
-      border-color: var(--color-text);
+    }
+    .hamburger span {
+      background: var(--color-text);
     }
 
     /* ===== RTL SUPPORT ===== */
@@ -602,7 +634,8 @@
       direction: rtl;
       text-align: right;
     }
-    body.rtl .nav-links { flex-direction: row-reverse; }
+    body.rtl .nav-tags { flex-direction: row-reverse; }
+    body.rtl .nav-actions { flex-direction: row-reverse; }
     body.rtl .cell-pill { left: auto; right: 12px; }
     body.rtl .team-card { text-align: right; }
     body.rtl .team-card-social { justify-content: flex-start; }
@@ -611,6 +644,10 @@
     body.rtl .footer-inner { direction: rtl; }
     body.rtl .vision-inner { direction: rtl; }
     body.rtl .nav-lang-btn { font-family: var(--font-body); }
+    body.rtl .cta-section { direction: rtl; text-align: right; }
+    body.rtl .cta-inner { text-align: right; }
+    body.rtl .about-hero-title { font-family: 'Noto Naskh Arabic', var(--font-display); }
+    body.rtl .vision-text { text-align: right; }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
@@ -681,16 +718,21 @@
     <a href="index.html" class="nav-brand">
       <img src="assets/images/logo.png" alt="Super Figure" class="nav-logo-img">
     </a>
-    <ul class="nav-links">
+    <ul class="nav-tags">
       <li><a href="index.html#editorial" data-i18n="nav.work">Work</a></li>
       <li><a href="about.html" class="active" data-i18n="nav.about">About</a></li>
       <li><a href="index.html#feed" data-i18n="nav.feed">Feed</a></li>
-      <li><a href="mailto:jacques.mak@manhattanxholding.com" class="nav-cta" data-i18n="nav.talk">Let's Talk</a></li>
-      <li><button class="nav-lang-btn" data-lang-toggle onclick="SF_I18N.toggle()">عربي</button></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-actions">
+      <button class="nav-lang-btn" data-lang-toggle onclick="SF_I18N.toggle()">عربي</button>
+      <a href="mailto:jacques.mak@manhattanxholding.com" class="nav-cta" data-i18n="nav.talk">Let's Talk</a>
+    </div>
+    <div class="nav-right-mobile">
+      <button class="nav-lang-btn" data-lang-toggle onclick="SF_I18N.toggle()">عربي</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -699,7 +741,6 @@
   <a href="about.html" data-i18n="nav.about">About</a>
   <a href="index.html#feed" data-i18n="nav.feed">Feed</a>
   <a href="mailto:jacques.mak@manhattanxholding.com" data-i18n="nav.contact">Contact</a>
-  <button class="nav-lang-btn" data-lang-toggle onclick="SF_I18N.toggle()">عربي</button>
 </div>
 
 <main id="main">
@@ -790,7 +831,7 @@
           <div class="team-card-info">
             <h3 class="team-card-name" data-i18n="about.card3.name">Jamie Zhang</h3>
             <span class="team-card-role" data-i18n="about.card3.role">Co-Founder & CEO</span>
-            <p class="team-card-bio" data-i18n="about.card3.bio">MIT graduate, former McKinsey Senior Engagement Manager. Co-founded Masdar Investment LLC with Oman Royal Families. Founded IRX Fin (RMB 10B angel funding).</p>
+            <p class="team-card-bio" data-i18n="about.card3.bio">MIT graduate, former McKinsey Senior Engagement Manager. Co-founded Masdar Investment LLC with Oman Royal Families. Founded IRX Fin — cross-border fintech.</p>
             <button class="team-learn-more" onclick="openModal('modal-jamie')"><span data-i18n="about.card3.more">Learn more</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
             <div class="team-card-social">
               <a href="#" class="team-social-btn" aria-label="LinkedIn">
@@ -975,7 +1016,7 @@
     <div class="modal-body">
       <span class="modal-label" data-i18n="modal.bg">Background</span>
       <p data-i18n="modal3.bg1">MIT graduate and former McKinsey Senior Engagement Manager, Jamie brings elite strategic consulting experience to Super Figure. Her career spans high-stakes advisory work across industries, sharpening her ability to architect scalable business models and drive organizational transformation at speed.</p>
-      <p data-i18n="modal3.bg2">Jamie co-founded Masdar Investment LLC in partnership with Oman Royal Families, navigating sovereign wealth and cross-border investment at the highest levels of Gulf finance. She also founded IRX Fin, a fintech venture that secured RMB 10 billion in angel funding — a testament to her capital-raising acumen and deep network across Chinese and Middle Eastern financial ecosystems.</p>
+      <p data-i18n="modal3.bg2">Jamie co-founded Masdar Investment LLC in partnership with Oman Royal Families, navigating sovereign wealth and cross-border investment at the highest levels of Gulf finance. She also founded IRX Fin, a fintech venture operating across Chinese and Middle Eastern financial ecosystems — leveraging her deep cross-border network and capital markets expertise.</p>
       <span class="modal-label" style="margin-top:1rem;" data-i18n="modal.role">Role at Super Figure</span>
       <p data-i18n="modal3.role1">As CEO of Super Figure, Jamie orchestrates the company's commercial strategy, partnership architecture, and market expansion. Her rare ability to bridge East and West — connecting Chinese capital networks with Gulf market opportunity — gives Super Figure a decisive edge in building a truly global media house rooted in the region.</p>
     </div>
