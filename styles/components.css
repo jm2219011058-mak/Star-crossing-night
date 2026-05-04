@@ -1,4 +1,4 @@
-/* Voice of Vision — Components (Light Theme) */
+/* Super Figure — Components (Light Theme) */
 
 /* ===== NAVIGATION ===== */
 .site-nav {
@@ -42,6 +42,13 @@
   color: var(--color-text);
   letter-spacing: 3px;
   text-transform: uppercase;
+}
+
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  border-radius: 4px;
 }
 
 .nav-links {

@@ -37,15 +37,12 @@
       will-change: transform;
       transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
     }
-    /* Solid fills — BOLD like boxer's wraps */
     .strip--solid { opacity: 0.18; }
-    /* Outlined / hollow */
     .strip--outline {
       background: transparent;
       border: 3.5px solid var(--sage);
       opacity: 0.22;
     }
-    /* Individual strip placements — exaggerated bandage wraps */
     .strip-1  { width: 420px; height: 48px; top: 4%;   left: -5%;  transform: rotate(-14deg); }
     .strip-2  { width: 600px; height: 38px; top: 12%;  right: -8%; transform: rotate(8deg); }
     .strip-3  { width: 320px; height: 56px; top: 26%;  left: 5%;   transform: rotate(-32deg); }
@@ -177,40 +174,61 @@
       gap: 8px;
     }
 
-    /* ===== HERO — WIREFRAME LAYOUT ===== */
+    /* ===== HERO — FULL-BLEED BACKGROUND IMAGE ===== */
     .hero {
       position: relative;
       z-index: 1;
       min-height: 100vh;
-      max-width: var(--max-width-wide);
-      margin: 0 auto;
-      padding: calc(var(--header-height) + 1.5rem) clamp(1rem, 3vw, 2.5rem) 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1.15fr;
-      grid-template-rows: auto 1fr;
-      gap: 16px;
-      align-content: center;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to top right,
+          rgba(26, 20, 16, 0.78) 0%,
+          rgba(26, 20, 16, 0.45) 40%,
+          rgba(26, 20, 16, 0.08) 70%,
+          transparent 100%
+        );
+      pointer-events: none;
     }
 
-    /* Top-right badge */
+    /* Floating badge — top-right */
     .hero-badge {
-      grid-column: 2;
-      grid-row: 1;
-      justify-self: end;
-      align-self: start;
+      position: absolute;
+      top: calc(var(--header-height) + 1.5rem);
+      right: clamp(1.5rem, 4vw, 3rem);
+      z-index: 2;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 20px;
+      padding: 10px 22px;
       border-radius: var(--radius-pill);
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(16px) saturate(1.4);
-      -webkit-backdrop-filter: blur(16px) saturate(1.4);
-      border: 1px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,0.2);
       font-size: var(--text-xs);
       letter-spacing: 0.06em;
-      color: var(--color-text-secondary);
-      box-shadow: var(--shadow-sm);
+      color: rgba(255,255,255,0.9);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
       opacity: 0;
       animation: heroUp 0.8s var(--ease-out-quint) 0.2s forwards;
     }
@@ -226,54 +244,48 @@
       50% { opacity: 1; transform: scale(1.1); }
     }
 
-    /* Right — large image card */
-    .hero-image {
-      grid-column: 2;
-      grid-row: 1 / 3;
-      position: relative;
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      background: var(--cream-deep);
-      min-height: 520px;
-    }
-    .hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(0.85);
-      transition: transform var(--duration-glacial) var(--ease-out-quint);
-    }
-    .hero-image:hover img { transform: scale(1.03); }
-    .hero-image .stat-badge {
+    /* Floating stat badge — right side */
+    .hero-stat {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.65);
+      right: clamp(1.5rem, 4vw, 3rem);
+      bottom: 30%;
+      z-index: 2;
+      background: rgba(255,255,255,0.12);
       backdrop-filter: blur(20px) saturate(1.4);
       -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      border: 1px solid rgba(255,255,255,0.5);
-      box-shadow: 0 8px 32px rgba(26,20,16,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius-lg);
+      padding: 18px 22px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      opacity: 0;
+      animation: heroUp 0.8s var(--ease-out-quint) 0.4s forwards;
     }
-    .hero-image .stat-badge .number { font-size: var(--text-xl); }
+    .hero-stat .number {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1;
+    }
+    .hero-stat .label {
+      font-size: var(--text-xs);
+      color: rgba(255,255,255,0.7);
+      margin-top: 4px;
+      line-height: 1.3;
+    }
 
-    /* Left-bottom — main headline glass card */
-    .hero-headline {
-      grid-column: 1;
-      grid-row: 1 / 3;
-      align-self: end;
-      padding: clamp(2rem, 4vw, 3rem);
-      background: rgba(255, 255, 255, 0.68);
-      backdrop-filter: blur(28px) saturate(1.5);
-      -webkit-backdrop-filter: blur(28px) saturate(1.5);
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.7);
+    /* Hero text — bottom-left */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 clamp(1.5rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+      max-width: 780px;
     }
     .hero-eyebrow {
       font-size: var(--text-xs);
       letter-spacing: var(--tracking-label);
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-bright);
       margin-bottom: 1rem;
       display: block;
       opacity: 0;
@@ -281,12 +293,12 @@
     }
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      font-size: clamp(3.5rem, 8vw, 7rem);
       font-weight: 600;
       line-height: 0.92;
       letter-spacing: var(--tracking-hero);
-      color: var(--color-text);
-      margin-bottom: 0.75rem;
+      color: #fff;
+      margin-bottom: 1rem;
       opacity: 0;
       transform: translateY(30px);
       animation: heroUp 1s var(--ease-out-quint) 0.2s forwards;
@@ -302,17 +314,17 @@
     .hero-subtitle {
       font-family: var(--font-arabic);
       font-size: var(--text-base);
-      color: var(--gold);
+      color: var(--gold-bright);
       direction: rtl;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
       opacity: 0;
       animation: heroUp 0.8s var(--ease-out-quint) 0.35s forwards;
     }
     .hero-desc {
       font-size: var(--text-sm);
-      color: var(--color-text-muted);
-      max-width: 380px;
-      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      max-width: 440px;
+      line-height: 1.75;
       letter-spacing: var(--tracking-body);
       margin-bottom: 1.75rem;
       opacity: 0;
@@ -359,13 +371,15 @@
       display: flex;
       gap: 8px;
       margin-top: 1.25rem;
+      opacity: 0;
+      animation: heroUp 0.8s var(--ease-out-quint) 0.65s forwards;
     }
     .hero-social-btn {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      border: 1px solid var(--color-border);
-      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       display: flex;
@@ -376,16 +390,186 @@
       text-decoration: none;
     }
     .hero-social-btn:hover {
-      border-color: var(--color-border-strong);
-      background: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.18);
     }
     .hero-social-btn svg {
       width: 15px;
       height: 15px;
-      stroke: var(--color-text-muted);
+      stroke: rgba(255,255,255,0.75);
       fill: none;
       stroke-width: 2;
     }
+
+    /* ===== CEREEN BENTO GRID ===== */
+    .bento-grid {
+      max-width: var(--max-width-wide);
+      margin: 0 auto;
+      padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 3vw, 2.5rem);
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 0.9fr;
+      grid-template-rows: 220px 220px 200px;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Cell base */
+    .bento-cell {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--cream-deep);
+      transition: transform var(--duration-normal) var(--ease-out-quint), box-shadow var(--duration-normal) var(--ease-out-quad);
+    }
+    .bento-cell:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .bento-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--duration-glacial) var(--ease-out-quint), filter var(--duration-slow) var(--ease-out-quad);
+    }
+    .bento-cell:hover img { transform: scale(1.04); }
+
+    /* Spanning cells */
+    .bento-cell--tall { grid-row: span 2; }
+    .bento-cell--wide { grid-column: span 2; }
+
+    /* Glass content cell */
+    .bento-cell--glass {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(24px) saturate(1.5);
+      -webkit-backdrop-filter: blur(24px) saturate(1.5);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.6);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .bento-cell--glass .bento-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+    .bento-cell--glass .bento-label {
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .bento-cell--glass .bento-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--color-text);
+      font-weight: 400;
+      line-height: 1.3;
+    }
+    .bento-cell--glass .bento-sub {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-top: 0.5rem;
+      line-height: 1.6;
+    }
+
+    /* Pill overlay on image cells */
+    .bento-cell .cell-pill {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+      border: none;
+    }
+
+    /* Stat ring cell */
+    .bento-cell--stat {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(24px) saturate(1.5);
+      -webkit-backdrop-filter: blur(24px) saturate(1.5);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 1.5rem;
+    }
+    .stat-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 3px solid var(--sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .stat-ring .number {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1;
+    }
+    .stat-ring-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* Promo card */
+    .bento-cell--promo {
+      background: var(--night-earth);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(1.25rem, 2vw, 2rem);
+      border: none;
+    }
+    .bento-cell--promo .promo-label {
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      margin-bottom: 0.5rem;
+    }
+    .bento-cell--promo .promo-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: #fff;
+      font-weight: 300;
+      line-height: 1.25;
+    }
+    .bento-cell--promo .promo-sub {
+      font-size: var(--text-xs);
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+
+    /* Grid cell assignments */
+    .bc-1 { grid-column: 1; grid-row: 1 / 3; } /* tall glass card */
+    .bc-2 { grid-column: 2; grid-row: 1; } /* image */
+    .bc-3 { grid-column: 3; grid-row: 1; } /* promo card */
+    .bc-4 { grid-column: 2; grid-row: 2; } /* image */
+    .bc-5 { grid-column: 3; grid-row: 2; } /* stat ring */
+    .bc-6 { grid-column: 1; grid-row: 3; } /* image */
+    .bc-7 { grid-column: 2 / 4; grid-row: 3; } /* wide image */
 
     /* ===== MANIFESTO ===== */
     .manifesto {
@@ -417,58 +601,6 @@
       direction: rtl;
       line-height: 1.9;
       margin-top: 2rem;
-    }
-
-    /* ===== IMAGE MOSAIC ===== */
-    .mosaic {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 45vh 45vh;
-      gap: 4px;
-      max-width: var(--max-width-wide);
-      margin: 0 auto;
-      padding: 0 clamp(1rem, 3vw, 2.5rem);
-      position: relative;
-      z-index: 1;
-    }
-    .mosaic-cell {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-lg);
-    }
-    .mosaic-cell:first-child { grid-row: 1 / 3; }
-    .mosaic-cell img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(0.85);
-      transition: transform var(--duration-glacial) var(--ease-out-quint), filter var(--duration-slow) var(--ease-out-quad);
-    }
-    .mosaic-cell:hover img {
-      transform: scale(1.04);
-      filter: saturate(1);
-    }
-    .mosaic-cell::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(26,20,16,0.5) 100%);
-      pointer-events: none;
-    }
-    .mosaic-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 1;
-      padding: 1.25rem;
-    }
-    .mosaic-caption span {
-      font-family: var(--font-display);
-      font-size: var(--text-sm);
-      color: #fff;
-      letter-spacing: var(--tracking-label);
-      text-transform: uppercase;
     }
 
     /* ===== MARQUEE ===== */
@@ -577,164 +709,6 @@
       line-height: 1.9;
     }
 
-    /* ===== HORIZONTAL IMAGE STRIP ===== */
-    .img-strip {
-      display: flex;
-      gap: 4px;
-      overflow: hidden;
-      height: 38vh;
-      min-height: 260px;
-      padding: 0 clamp(1rem, 3vw, 2.5rem);
-      max-width: var(--max-width-wide);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .img-strip-cell {
-      flex: 1;
-      overflow: hidden;
-      position: relative;
-      border-radius: var(--radius-lg);
-    }
-    .img-strip-cell img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(0.8);
-      transition: transform var(--duration-glacial) var(--ease-out-quint), filter var(--duration-slow) var(--ease-out-quad);
-    }
-    .img-strip-cell:hover img {
-      transform: scale(1.06);
-      filter: saturate(1);
-    }
-
-    /* ===== PEOPLE ===== */
-    .people-section {
-      padding: clamp(6rem, 14vw, 14rem) clamp(2rem, 6vw, 4rem);
-      background: var(--color-bg-alt);
-      position: relative;
-      z-index: 1;
-    }
-    .people-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-    .people-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: end;
-      margin-bottom: clamp(3rem, 6vw, 5rem);
-    }
-    .people-header h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-3xl);
-      font-weight: 300;
-      color: var(--color-text);
-      line-height: 1.1;
-      letter-spacing: var(--tracking-display);
-    }
-    .people-header p {
-      font-size: var(--text-base);
-      color: var(--color-text-muted);
-      max-width: 360px;
-      justify-self: end;
-    }
-    .people-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(1rem, 2vw, 1.5rem);
-    }
-    .person-card {
-      background: rgba(255, 255, 255, 0.55);
-      backdrop-filter: blur(20px) saturate(1.4);
-      -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      padding: clamp(2rem, 3vw, 2.5rem);
-      border-radius: var(--radius-xl);
-      transition: border-color var(--duration-fast) var(--ease-out-quad), transform var(--duration-normal) var(--ease-out-quint), box-shadow var(--duration-normal) var(--ease-out-quad);
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.5);
-    }
-    .person-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px; height: 0;
-      background: var(--gold);
-      border-radius: 3px 0 0 3px;
-      transition: height var(--duration-slow) var(--ease-out);
-    }
-    .person-card:hover {
-      border-color: var(--color-border-hover);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-card-hover);
-    }
-    .person-card:hover::before { height: 100%; }
-    .person-name {
-      font-family: var(--font-display);
-      font-size: var(--text-xl);
-      color: var(--color-text);
-      font-weight: 400;
-      margin-bottom: 0.4rem;
-    }
-    .person-role {
-      font-size: var(--text-xs);
-      color: var(--gold);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
-    }
-    .person-bio {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-      line-height: 1.65;
-      letter-spacing: var(--tracking-body);
-    }
-
-    /* ===== FULL-BLEED PARALLAX ===== */
-    .fullbleed {
-      position: relative;
-      height: 60vh;
-      min-height: 400px;
-      overflow: hidden;
-      border-radius: 0;
-    }
-    .fullbleed img {
-      width: 100%;
-      height: 130%;
-      object-fit: cover;
-      position: absolute;
-      top: -15%;
-      left: 0;
-      filter: saturate(0.6) brightness(0.45);
-      will-change: transform;
-    }
-    .fullbleed-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-      text-align: center;
-    }
-    .fullbleed-overlay h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-3xl);
-      color: #fff;
-      font-weight: 300;
-      letter-spacing: var(--tracking-display);
-    }
-    .fullbleed-overlay .ar-place {
-      font-family: var(--font-arabic);
-      font-size: var(--text-lg);
-      color: var(--gold-bright);
-      direction: rtl;
-      margin-top: 0.5rem;
-    }
-
     /* ===== X / TWITTER FEED ===== */
     .xfeed-section {
       padding: clamp(6rem, 14vw, 14rem) 0;
@@ -829,7 +803,135 @@
       filter: saturate(1);
     }
 
-    /* ===== REVENUE (on alt bg) ===== */
+    /* ===== PEOPLE (bento feel) ===== */
+    .people-section {
+      padding: clamp(6rem, 14vw, 14rem) clamp(2rem, 6vw, 4rem);
+      background: var(--color-bg-alt);
+      position: relative;
+      z-index: 1;
+    }
+    .people-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .people-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+    .people-header h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 300;
+      color: var(--color-text);
+      line-height: 1.1;
+      letter-spacing: var(--tracking-display);
+    }
+    .people-header p {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      max-width: 360px;
+      justify-self: end;
+    }
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: clamp(1rem, 2vw, 1.5rem);
+    }
+    .person-card {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      padding: clamp(2rem, 3vw, 2.5rem);
+      border-radius: var(--radius-xl);
+      transition: border-color var(--duration-fast) var(--ease-out-quad), transform var(--duration-normal) var(--ease-out-quint), box-shadow var(--duration-normal) var(--ease-out-quad);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .person-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--gold);
+      border-radius: 3px 0 0 3px;
+      transition: height var(--duration-slow) var(--ease-out);
+    }
+    .person-card:hover {
+      border-color: var(--color-border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .person-card:hover::before { height: 100%; }
+    .person-name {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--color-text);
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+    .person-role {
+      font-size: var(--text-xs);
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .person-bio {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      letter-spacing: var(--tracking-body);
+    }
+
+    /* ===== FULL-BLEED PARALLAX ===== */
+    .fullbleed {
+      position: relative;
+      height: 60vh;
+      min-height: 400px;
+      overflow: hidden;
+      border-radius: 0;
+    }
+    .fullbleed img {
+      width: 100%;
+      height: 130%;
+      object-fit: cover;
+      position: absolute;
+      top: -15%;
+      left: 0;
+      filter: saturate(0.6) brightness(0.45);
+      will-change: transform;
+    }
+    .fullbleed-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      text-align: center;
+    }
+    .fullbleed-overlay h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      color: #fff;
+      font-weight: 300;
+      letter-spacing: var(--tracking-display);
+    }
+    .fullbleed-overlay .ar-place {
+      font-family: var(--font-arabic);
+      font-size: var(--text-lg);
+      color: var(--gold-bright);
+      direction: rtl;
+      margin-top: 0.5rem;
+    }
+
+    /* ===== REVENUE (bento feel) ===== */
     .revenue-section {
       background: var(--color-bg-alt);
       padding: clamp(6rem, 14vw, 14rem) clamp(2rem, 6vw, 4rem);
@@ -860,7 +962,8 @@
     .rev-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      grid-template-rows: auto auto;
+      gap: 14px;
     }
     .rev-cell {
       background: rgba(255, 255, 255, 0.55);
@@ -923,40 +1026,51 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
-      .hero {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        min-height: auto;
+      .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
         gap: 12px;
       }
-      .hero-badge { grid-column: 1; grid-row: 1; }
-      .hero-image { grid-column: 1; grid-row: 1; min-height: 340px; }
-      .hero-headline { grid-column: 1; grid-row: 2; }
+      .bc-1 { grid-column: 1; grid-row: 1 / 3; }
+      .bc-2 { grid-column: 2; grid-row: 1; }
+      .bc-3 { grid-column: 2; grid-row: 2; }
+      .bc-4 { grid-column: 1; grid-row: 3; }
+      .bc-5 { grid-column: 2; grid-row: 3; }
+      .bc-6 { grid-column: 1; grid-row: 4; }
+      .bc-7 { grid-column: 2; grid-row: 4; }
+      .bento-cell { min-height: 200px; }
     }
 
     @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        min-height: auto;
-        padding-top: calc(var(--header-height) + 1rem);
+      .hero-title {
+        font-size: clamp(2.5rem, 10vw, 4rem);
       }
-      .hero-badge { display: none; }
-      .hero-image { grid-column: 1; grid-row: 1; min-height: 260px; }
-      .hero-headline { grid-column: 1; grid-row: 2; }
-      .mosaic {
+      .hero-stat { display: none; }
+      .hero-badge {
+        padding: 8px 16px;
+        font-size: 0.65rem;
+      }
+
+      .bento-grid {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 35vh 25vh;
+        grid-template-rows: auto;
+        gap: 10px;
       }
-      .mosaic-cell:first-child { grid-row: auto; }
+      .bc-1 { grid-column: 1 / 3; grid-row: auto; min-height: 260px; }
+      .bc-2 { grid-column: 1; grid-row: auto; min-height: 180px; }
+      .bc-3 { grid-column: 2; grid-row: auto; min-height: 180px; }
+      .bc-4 { grid-column: 1; grid-row: auto; min-height: 180px; }
+      .bc-5 { grid-column: 2; grid-row: auto; min-height: 180px; }
+      .bc-6 { grid-column: 1; grid-row: auto; min-height: 160px; }
+      .bc-7 { grid-column: 2; grid-row: auto; min-height: 160px; }
+      .bento-cell--tall { grid-row: auto; }
+
       .ed-block, .ed-block.flip {
         grid-template-columns: 1fr;
         gap: 2rem;
       }
       .ed-block.flip .ed-img { order: 0; }
       .ed-block.flip .ed-text { order: 0; }
-      .img-strip { flex-direction: column; height: auto; }
-      .img-strip-cell { height: 30vh; }
       .people-header { grid-template-columns: 1fr; gap: 1rem; }
       .people-header p { justify-self: start; }
       .people-grid { grid-template-columns: 1fr; }
@@ -1000,7 +1114,7 @@
 <nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">
-      <span class="nav-logo">SUPER FIGURE</span>
+      <img src="assets/images/logo.png" alt="Super Figure" class="nav-logo-img">
     </a>
     <ul class="nav-links">
       <li><a href="#editorial">Work</a></li>
@@ -1023,26 +1137,28 @@
 
 <main id="main">
 
-  <!-- ===== HERO ===== -->
+  <!-- ===== HERO — FULL-BLEED BACKGROUND ===== -->
   <section class="hero" id="about">
 
-    <!-- Top-right badge -->
+    <!-- Background image -->
+    <div class="hero-bg">
+      <img src="assets/images/Hero.jpeg" alt="Dreamy pastel hills landscape" loading="eager">
+    </div>
+
+    <!-- Floating badge — top-right -->
     <div class="hero-badge">
       <span class="badge-dot"></span>
       Open for Submissions
     </div>
 
-    <!-- Right — large image -->
-    <div class="hero-image">
-      <img src="assets/images/editorial-portrait.png" alt="Editorial portrait" loading="eager">
-      <div class="stat-badge">
-        <div class="number">50+</div>
-        <div class="label">Stories published<br>across the Gulf</div>
-      </div>
+    <!-- Floating stat — right side -->
+    <div class="hero-stat">
+      <div class="number">50+</div>
+      <div class="label">Stories published<br>across the Gulf</div>
     </div>
 
-    <!-- Left-bottom — headline card -->
-    <div class="hero-headline">
+    <!-- Bottom-left text content -->
+    <div class="hero-content">
       <span class="hero-eyebrow">Super Figure</span>
       <h1 class="hero-title">Call <span class="accent">for</span><br>Innovator</h1>
       <p class="hero-subtitle" lang="ar">نداء للمبتكرين</p>
@@ -1052,7 +1168,6 @@
           Share your Story
           <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
         </a>
-        <a href="#editorial" class="btn btn-outline" style="border-radius:var(--radius-pill);">Explore</a>
       </div>
       <div class="hero-social">
         <a href="mailto:jacques.mak@manhattanxholding.com" class="hero-social-btn" aria-label="Email">
@@ -1066,29 +1181,123 @@
 
   </section>
 
-  <!-- ===== IMAGE MOSAIC ===== -->
-  <div class="mosaic reveal" aria-label="What we cover">
-    <div class="mosaic-cell reveal-scale">
-      <img src="assets/images/tech-summit.jpg" alt="Tech summit" loading="lazy">
-      <div class="mosaic-caption"><span>Summits</span></div>
+  <!-- ===== CEREEN BENTO GRID ===== -->
+  <section class="bento-grid" aria-label="Visual showcase">
+
+    <!-- Cell 1: Tall glass card with pills + text (spans 2 rows) -->
+    <div class="bento-cell bento-cell--glass bento-cell--tall bc-1 reveal-scale">
+      <div class="bento-pills">
+        <span class="pill"><span class="dot"></span>Media</span>
+        <span class="pill pill--gold"><span class="dot"></span>Gulf</span>
+        <span class="pill"><span class="dot"></span>Tech</span>
+      </div>
+      <span class="bento-label">SF Dialogues</span>
+      <div class="bento-title">Episode 01</div>
+      <p class="bento-sub">Weekly conversations with founders, racers, and investors — filmed in real places. A studio. A restaurant. On the road.</p>
+      <div style="margin-top:auto; padding-top:1.5rem;">
+        <div class="circle-cta-wrap">
+          <a href="#editorial" class="circle-cta" aria-label="Explore work">
+            <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+          <span class="circle-cta-label">Explore</span>
+        </div>
+      </div>
     </div>
-    <div class="mosaic-cell reveal reveal-delay-1">
-      <img src="assets/images/microphone.jpg" alt="Podcast" loading="lazy">
-      <div class="mosaic-caption"><span>Dialogue</span></div>
+
+    <!-- Cell 2: Image — editorial portrait -->
+    <div class="bento-cell bc-2 reveal reveal-delay-1">
+      <img src="assets/images/editorial-portrait.png" alt="Editorial portrait" loading="lazy">
+      <span class="cell-pill">Portrait</span>
     </div>
-    <div class="mosaic-cell reveal reveal-delay-2">
-      <img src="assets/images/gulf-skyline.jpg" alt="Gulf skyline" loading="lazy">
-      <div class="mosaic-caption"><span>Gulf</span></div>
+
+    <!-- Cell 3: Dark promo card -->
+    <div class="bento-cell bento-cell--promo bc-3 reveal reveal-delay-2">
+      <span class="promo-label">Coming Soon</span>
+      <div class="promo-title">The Creator Incubator</div>
+      <p class="promo-sub">Apply to join the first cohort of Gulf-based storytellers.</p>
     </div>
-    <div class="mosaic-cell reveal reveal-delay-3">
-      <img src="assets/images/luxury-car.jpg" alt="Luxury automotive" loading="lazy">
-      <div class="mosaic-caption"><span>Automotive</span></div>
+
+    <!-- Cell 4: Image — F1 classic -->
+    <div class="bento-cell bc-4 reveal reveal-delay-3">
+      <img src="assets/images/f1-classic.png" alt="Classic F1 car" loading="lazy">
+      <span class="cell-pill">Motorsport</span>
     </div>
-    <div class="mosaic-cell reveal reveal-delay-4">
-      <img src="assets/images/tech-crowd.jpg" alt="Tech event crowd" loading="lazy">
-      <div class="mosaic-caption"><span>Events</span></div>
+
+    <!-- Cell 5: Stat ring + circle CTA -->
+    <div class="bento-cell bento-cell--stat bc-5 reveal reveal-delay-4">
+      <div class="stat-ring">
+        <span class="number">7</span>
+      </div>
+      <span class="stat-ring-label">Countries<br>covered</span>
     </div>
-  </div>
+
+    <!-- Cell 6: Image — gradient orb -->
+    <div class="bento-cell bc-6 reveal reveal-delay-1">
+      <img src="assets/images/gradient-orb.png" alt="Gradient art" loading="lazy">
+      <span class="cell-pill">Visual</span>
+    </div>
+
+    <!-- Cell 7: Wide image — kaleidoscope art -->
+    <div class="bento-cell bento-cell--wide bc-7 reveal reveal-delay-2">
+      <img src="assets/images/kaleidoscope-art.png" alt="Kaleidoscope art" loading="lazy">
+      <span class="cell-pill">Art Direction</span>
+    </div>
+
+  </section>
+
+  <!-- ===== X / TWITTER FEED (Section 3) ===== -->
+  <section class="xfeed-section" id="feed">
+    <div class="xfeed-inner">
+      <div class="xfeed-header reveal">
+        <div>
+          <span class="ed-label" style="margin-bottom:0.75rem;">Live</span>
+          <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); font-weight:300; color:var(--color-text);">What we're saying.</h2>
+        </div>
+        <a href="https://x.com" target="_blank" rel="noopener" class="btn btn-outline" style="border-radius:var(--radius-pill); padding:10px 24px;">Follow @SuperFigure</a>
+      </div>
+      <div class="xfeed-scroll">
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">2h</span>
+          </div>
+          <p class="xfeed-text">Just wrapped filming Episode 01 of SF Dialogues. Three cameras. One table. A founder who built a $2B company from a dorm room. Dropping next week.</p>
+          <div class="xfeed-img"><img src="assets/images/podcast-studio.jpg" alt="SF Dialogues podcast studio" loading="lazy"></div>
+        </div>
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">8h</span>
+          </div>
+          <p class="xfeed-text">On the ground at LEAP 2026 in Riyadh. 172,000 attendees. We're here to cover what happens after the keynotes end.</p>
+          <div class="xfeed-img"><img src="assets/images/tech-summit.jpg" alt="LEAP 2026 tech summit" loading="lazy"></div>
+        </div>
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">1d</span>
+          </div>
+          <p class="xfeed-text">Maffi Racing just signed their 21st driver. We've been documenting the journey since driver number 3. The long-form piece drops this Thursday.</p>
+          <div class="xfeed-img"><img src="assets/images/racing-car.jpg" alt="Racing car" loading="lazy"></div>
+        </div>
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">2d</span>
+          </div>
+          <p class="xfeed-text">New essay on the platform: "Why the Gulf's esports scene will outpace Europe by 2028." Written by a creator in our incubator program. Read it free.</p>
+        </div>
+        <div class="xfeed-card">
+          <div class="xfeed-meta">
+            <span class="xfeed-handle">@SuperFigure</span>
+            <span class="xfeed-time">3d</span>
+          </div>
+          <p class="xfeed-text">Min-Liang Tan told us something off-camera that changed how we think about AI and creativity. More in SF Dialogues Ep. 02.</p>
+          <div class="xfeed-img"><img src="assets/images/ai-abstract.jpg" alt="Abstract AI art" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ===== MANIFESTO ===== -->
   <section class="manifesto">
@@ -1111,20 +1320,20 @@
   <!-- ===== MARQUEE ===== -->
   <div class="marquee-strip" aria-hidden="true">
     <div class="marquee-track">
-      <span class="marquee-item">Tech Summits<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">Motorsport<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">Brand Collabs<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">SF Dialogues<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">Documentary<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">Creator Platform<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">AI Advisory<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">Tech Summits<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">Motorsport<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">Brand Collabs<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">SF Dialogues<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">Documentary<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">Creator Platform<span class="marquee-sep">◆</span></span>
-      <span class="marquee-item">AI Advisory<span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Tech Summits<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Motorsport<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Brand Collabs<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">SF Dialogues<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Documentary<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Creator Platform<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">AI Advisory<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Tech Summits<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Motorsport<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Brand Collabs<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">SF Dialogues<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Documentary<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Creator Platform<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">AI Advisory<span class="marquee-sep">&#9670;</span></span>
     </div>
   </div>
 
@@ -1171,68 +1380,6 @@
     </div>
   </section>
 
-  <!-- ===== IMAGE STRIP ===== -->
-  <div class="img-strip" aria-label="Visual gallery">
-    <div class="img-strip-cell"><img src="assets/images/racing-car.jpg" alt="Motorsport" loading="lazy"></div>
-    <div class="img-strip-cell"><img src="assets/images/stadium.jpg" alt="Sports venue" loading="lazy"></div>
-    <div class="img-strip-cell"><img src="assets/images/ai-abstract.jpg" alt="AI technology" loading="lazy"></div>
-    <div class="img-strip-cell"><img src="assets/images/podcast-studio.jpg" alt="Podcast studio" loading="lazy"></div>
-  </div>
-
-  <!-- ===== X / TWITTER FEED ===== -->
-  <section class="xfeed-section" id="feed">
-    <div class="xfeed-inner">
-      <div class="xfeed-header reveal">
-        <div>
-          <span class="ed-label" style="margin-bottom:0.75rem;">Live</span>
-          <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); font-weight:300; color:var(--color-text);">What we're saying.</h2>
-        </div>
-        <a href="https://x.com" target="_blank" rel="noopener" class="btn btn-outline" style="border-radius:var(--radius-pill); padding:10px 24px;">Follow @SuperFigure</a>
-      </div>
-      <div class="xfeed-scroll">
-        <div class="xfeed-card">
-          <div class="xfeed-meta">
-            <span class="xfeed-handle">@SuperFigure</span>
-            <span class="xfeed-time">2h</span>
-          </div>
-          <p class="xfeed-text">Just wrapped filming Episode 01 of SF Dialogues. Three cameras. One table. A founder who built a $2B company from a dorm room. Dropping next week.</p>
-          <div class="xfeed-img"><img src="assets/images/podcast-studio.jpg" alt="SF Dialogues podcast studio with three-camera setup" loading="lazy"></div>
-        </div>
-        <div class="xfeed-card">
-          <div class="xfeed-meta">
-            <span class="xfeed-handle">@SuperFigure</span>
-            <span class="xfeed-time">8h</span>
-          </div>
-          <p class="xfeed-text">On the ground at LEAP 2026 in Riyadh. 172,000 attendees. We're here to cover what happens after the keynotes end.</p>
-          <div class="xfeed-img"><img src="assets/images/tech-summit.jpg" alt="LEAP 2026 tech summit in Riyadh" loading="lazy"></div>
-        </div>
-        <div class="xfeed-card">
-          <div class="xfeed-meta">
-            <span class="xfeed-handle">@SuperFigure</span>
-            <span class="xfeed-time">1d</span>
-          </div>
-          <p class="xfeed-text">Maffi Racing just signed their 21st driver. We've been documenting the journey since driver number 3. The long-form piece drops this Thursday.</p>
-          <div class="xfeed-img"><img src="assets/images/f1-track.jpg" alt="Maffi Racing driver on circuit" loading="lazy"></div>
-        </div>
-        <div class="xfeed-card">
-          <div class="xfeed-meta">
-            <span class="xfeed-handle">@SuperFigure</span>
-            <span class="xfeed-time">2d</span>
-          </div>
-          <p class="xfeed-text">New essay on the platform: "Why the Gulf's esports scene will outpace Europe by 2028." Written by a creator in our incubator program. Read it free.</p>
-        </div>
-        <div class="xfeed-card">
-          <div class="xfeed-meta">
-            <span class="xfeed-handle">@SuperFigure</span>
-            <span class="xfeed-time">3d</span>
-          </div>
-          <p class="xfeed-text">Min-Liang Tan told us something off-camera that changed how we think about AI and creativity. More in SF Dialogues Ep. 02.</p>
-          <div class="xfeed-img"><img src="assets/images/esports.jpg" alt="Esports gaming arena" loading="lazy"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== PEOPLE ===== -->
   <section class="people-section" id="people">
     <div class="people-inner">
@@ -1263,7 +1410,7 @@
 
   <!-- ===== FULL-BLEED PARALLAX ===== -->
   <section class="fullbleed" aria-label="Headquarters">
-    <img src="assets/images/city-night-aerial.jpg" alt="Saudi Arabia" loading="lazy" id="parallaxImg">
+    <img src="assets/images/gulf-skyline.jpg" alt="Saudi Arabia" loading="lazy" id="parallaxImg">
     <div class="fullbleed-overlay">
       <div>
         <h2>Based in Saudi Arabia.</h2>
@@ -1324,8 +1471,7 @@
 <footer class="site-footer" role="contentinfo">
   <div class="footer-inner" style="grid-template-columns: 1fr 1fr;">
     <div>
-      <div class="footer-brand" style="font-size:var(--text-lg);">Super Figure</div>
-      <p class="footer-desc" lang="ar" style="font-family:var(--font-arabic); direction:rtl; margin-top:0.5rem;">سوبر فيغر</p>
+      <img src="assets/images/logo.png" alt="Super Figure" style="height:48px; width:auto; border-radius:4px;">
     </div>
     <div style="text-align:right;">
       <ul class="footer-links" style="align-items:flex-end;">
@@ -1366,13 +1512,11 @@
   const strips = document.querySelectorAll('.strip');
   if (!strips.length) return;
 
-  // Cache each strip's base rotation and center position
   const stripData = [];
   function cachePositions() {
     stripData.length = 0;
     strips.forEach((el, i) => {
       const rect = el.getBoundingClientRect();
-      // Extract base rotation from the class-set transform
       const style = window.getComputedStyle(el);
       const matrix = style.transform;
       let baseAngle = 0;
@@ -1410,13 +1554,12 @@
   }, { passive: true });
 
   function updateStrips() {
-    const radius = 400; // influence radius in px
+    const radius = 400;
     stripData.forEach((s) => {
       const dx = mouseX - s.cx;
       const dy = mouseY - s.cy;
       const dist = Math.sqrt(dx * dx + dy * dy);
       const influence = Math.max(0, 1 - dist / radius);
-      // Organic distortion: slight rotation, translate, and scale shift
       const rotateOffset = influence * 8 * Math.sign(dx);
       const tx = influence * dx * 0.04;
       const ty = influence * dy * 0.03;
@@ -1426,7 +1569,6 @@
     ticking = false;
   }
 
-  // Recache on scroll for accurate Y positions
   let scrollTimer;
   window.addEventListener('scroll', () => {
     clearTimeout(scrollTimer);
