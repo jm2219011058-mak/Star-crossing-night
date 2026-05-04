@@ -1136,20 +1136,27 @@
     }
 
     /* ===== RESPONSIVE ===== */
+    /* Tablet: 2-col organic
+       [--- Noor Riyadh wide ---]
+       [glass       ] [promo      ]
+       [F1 tall     ] [stat       ]
+       [F1 tall     ] [LEAP       ]
+       [--- Diriyah wide ---     ]
+       [shows       ] [           ] */
     @media (max-width: 1024px) {
       .bento-grid {
-        grid-template-columns: 1.1fr 0.9fr;
-        grid-template-rows: 230px 190px 170px 210px 140px;
+        grid-template-columns: 1.15fr 0.85fr;
+        grid-template-rows: 220px auto 160px 160px 200px 130px;
         gap: 11px;
       }
-      .bc-1 { grid-column: 1; grid-row: 1 / 3; }
-      .bc-2 { grid-column: 2; grid-row: 1; }
+      .bc-1 { grid-column: 1; grid-row: 2; }
+      .bc-2 { grid-column: 1 / 3; grid-row: 1; }
       .bc-3 { grid-column: 2; grid-row: 2; }
-      .bc-4 { grid-column: 1; grid-row: 3; }
+      .bc-4 { grid-column: 1; grid-row: 3 / 5; }
       .bc-5 { grid-column: 2; grid-row: 3; }
-      .bc-6 { grid-column: 1; grid-row: 4; }
-      .bc-7 { grid-column: 2; grid-row: 4; }
-      .bc-8 { grid-column: 1 / 3; grid-row: 5; }
+      .bc-6 { grid-column: 2; grid-row: 4; }
+      .bc-7 { grid-column: 1 / 3; grid-row: 5; }
+      .bc-8 { grid-column: 1 / 3; grid-row: 6; }
       .bento-cell--tall { grid-row: auto; }
     }
 
@@ -1219,7 +1226,7 @@
 
 <!-- Page Loader -->
 <div class="page-loader" id="pageLoader">
-  <div class="loader-mark">SF</div>
+  <img src="assets/images/logo nobg.png" alt="Super Figure" class="loader-mark">
 </div>
 
 <a href="#main" class="skip-link">Skip to content</a>
@@ -1305,7 +1312,7 @@
         <span class="pill pill--gold"><span class="dot"></span>Gulf</span>
         <span class="pill"><span class="dot"></span>Tech</span>
       </div>
-      <span class="bento-label">SF Dialogues</span>
+      <span class="bento-label">Voice of Vision</span>
       <div class="bento-title">Episode 01</div>
       <p class="bento-sub">Weekly conversations with founders, racers, and investors — filmed in real places. A studio. A restaurant. On the road.</p>
       <div style="margin-top:auto; padding-top:1.5rem;">
@@ -1403,8 +1410,8 @@
             <span class="xfeed-handle">@SuperFigure</span>
             <span class="xfeed-time">2h</span>
           </div>
-          <p class="xfeed-text">Just wrapped filming Episode 01 of SF Dialogues. Three cameras. One table. A founder who built a $2B company from a dorm room. Dropping next week.</p>
-          <div class="xfeed-img"><img src="assets/images/podcast-studio.jpg" alt="SF Dialogues podcast studio" loading="lazy"></div>
+          <p class="xfeed-text">Just wrapped filming Episode 01 of Voice of Vision. Three cameras. One table. A founder who built a $2B company from a dorm room. Dropping next week.</p>
+          <div class="xfeed-img"><img src="assets/images/podcast-studio.jpg" alt="Voice of Vision podcast studio" loading="lazy"></div>
         </div>
         <div class="xfeed-card">
           <div class="xfeed-meta">
@@ -1434,7 +1441,7 @@
             <span class="xfeed-handle">@SuperFigure</span>
             <span class="xfeed-time">3d</span>
           </div>
-          <p class="xfeed-text">Min-Liang Tan told us something off-camera that changed how we think about AI and creativity. More in SF Dialogues Ep. 02.</p>
+          <p class="xfeed-text">Min-Liang Tan told us something off-camera that changed how we think about AI and creativity. More in Voice of Vision Ep. 02.</p>
           <div class="xfeed-img"><img src="assets/images/ai-abstract.jpg" alt="Abstract AI art" loading="lazy"></div>
         </div>
       </div>
@@ -1465,14 +1472,14 @@
       <span class="marquee-item">Tech Summits<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">Motorsport<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">Brand Collabs<span class="marquee-sep">&#9670;</span></span>
-      <span class="marquee-item">SF Dialogues<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Voice of Vision<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">Documentary<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">Creator Platform<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">AI Advisory<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">Tech Summits<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">Motorsport<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">Brand Collabs<span class="marquee-sep">&#9670;</span></span>
-      <span class="marquee-item">SF Dialogues<span class="marquee-sep">&#9670;</span></span>
+      <span class="marquee-item">Voice of Vision<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">Documentary<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">Creator Platform<span class="marquee-sep">&#9670;</span></span>
       <span class="marquee-item">AI Advisory<span class="marquee-sep">&#9670;</span></span>
@@ -1497,13 +1504,13 @@
 
       <div class="ed-block flip">
         <div class="ed-text reveal-left">
-          <span class="ed-label">SF Dialogues</span>
+          <span class="ed-label">Voice of Vision</span>
           <h2 class="ed-title">The interview<br>that goes<br>somewhere.</h2>
           <p class="ed-body">Weekly conversations with tech founders, racing drivers, and investors — filmed in real places. A studio. A restaurant. On the road. Entertainment meets substance.</p>
           <p class="ed-ar" lang="ar">حوارات أسبوعية مع مؤسسي التقنية وسائقي السباقات والمستثمرين — تُصوَّر في أماكن حقيقية. ترفيه يلتقي بالجوهر.</p>
         </div>
         <div class="ed-img reveal-right">
-          <img src="assets/images/interview-mics.jpg" alt="SF Dialogues podcast" loading="lazy">
+          <img src="assets/images/interview-mics.jpg" alt="Voice of Vision podcast" loading="lazy">
         </div>
       </div>
 

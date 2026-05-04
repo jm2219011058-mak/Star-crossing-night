@@ -76,11 +76,10 @@
 }
 
 .loader-mark {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  color: var(--gold);
+  height: 28px;
+  width: auto;
+  opacity: 0.3;
   animation: loaderPulse 1.5s ease-in-out infinite;
-  letter-spacing: 8px;
 }
 
 @keyframes loaderPulse {
